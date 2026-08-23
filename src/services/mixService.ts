@@ -32,11 +32,47 @@ export interface MixComment {
 const MIXES_STORAGE_KEY = "eray_mansur_mixes_v3";
 const MIX_COMMENTS_KEY = "eray_mansur_mix_comments_v3";
 
+const DEFAULT_SAMPLE_MIXES: CommunityMix[] = [
+  {
+    id: "mix_preset_1",
+    title: "ALLIANCE Drill Mashup (Club Edit)",
+    description: "bak ne dicem & aktiv2 özel geçiş ve drop remixi.",
+    coverImage: "/assets/images/alliance_cover.jpg",
+    audioUrl: "/assets/audio/bak_ne_dicem.mp4",
+    creatorId: "user_eray067",
+    creatorName: "DJ Alliance",
+    creatorAvatar: "/assets/images/eray067_avatar.jpg",
+    usedTrackIds: ["bak_ne_dicem", "aktiv2"],
+    usedArtists: ["ERAY067", "MANSUR"],
+    likesCount: 142,
+    totalListens: 1850,
+    commentsCount: 12,
+    createdAt: "2026-08-20T14:00:00.000Z"
+  },
+  {
+    id: "mix_preset_2",
+    title: "NAFİLE x SOFİ Slowed + Reverb",
+    description: "Gece sürüşü için Malatya & Ankara trap atmosferi.",
+    coverImage: "/assets/images/mansur_portrait.jpg",
+    audioUrl: "/assets/audio/nafile.mp4",
+    creatorId: "user_mansur",
+    creatorName: "SoundLab TR",
+    creatorAvatar: "/assets/images/mansur_avatar.jpg",
+    usedTrackIds: ["nafile", "sofi"],
+    usedArtists: ["MANSUR"],
+    likesCount: 98,
+    totalListens: 1230,
+    commentsCount: 8,
+    createdAt: "2026-08-21T18:30:00.000Z"
+  }
+];
+
 export const MixService = {
   init(): void {
     try {
-      if (!localStorage.getItem(MIXES_STORAGE_KEY)) {
-        localStorage.setItem(MIXES_STORAGE_KEY, JSON.stringify([]));
+      const stored = localStorage.getItem(MIXES_STORAGE_KEY);
+      if (!stored || JSON.parse(stored).length === 0) {
+        localStorage.setItem(MIXES_STORAGE_KEY, JSON.stringify(DEFAULT_SAMPLE_MIXES));
       }
     } catch {
       // ignore
