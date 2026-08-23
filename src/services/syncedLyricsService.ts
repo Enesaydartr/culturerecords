@@ -133,11 +133,21 @@ export const SyncedLyricsService = {
       Object.entries(backupObj).forEach(([k, v]) => {
         if (k.startsWith(STORAGE_KEY_PREFIX) || k.startsWith(TRIM_KEY_PREFIX)) {
           localStorage.setItem(k, typeof v === "string" ? v : JSON.stringify(v));
+        } else if (typeof v === "object" && v !== null) {
+          // Format from exported JSON: { trackId: { lyrics: [...], trim: {...} } }
+          const item = v as any;
+          if ("lyrics" in item && Array.isArray(item.lyrics) && item.lyrics.length > 0) {
+            localStorage.setItem(STORAGE_KEY_PREFIX + k, JSON.stringify(item.lyrics));
+          }
+          if ("trim" in item && item.trim) {
+            localStorage.setItem(TRIM_KEY_PREFIX + k, JSON.stringify(item.trim));
+          }
         }
       });
       window.dispatchEvent(new CustomEvent("synced-lyrics-updated", { detail: {} }));
       return true;
-    } catch {
+    } catch (e) {
+      console.error("restoreAllBackupData failed:", e);
       return false;
     }
   },
