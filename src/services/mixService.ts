@@ -1,5 +1,6 @@
 import { Track, PLAYLIST } from "../data/artists";
 import { AudioStorageService } from "./audioStorageService";
+import { UserProfile } from "./authService";
 
 export interface CommunityMix {
   id: string;
@@ -198,15 +199,30 @@ export const MixService = {
     }
   },
 
-  async deleteMix(mixId: string): Promise<boolean> {
+  canDeleteMix(mixId: string, currentUser?: UserProfile | null): boolean {
+    if (!currentUser) return false;
+    if (currentUser.role === "admin") return true;
+    const mix = this.getMixById(mixId);
+    return mix ? mix.creatorId === currentUser.id : false;
+  },
+
+  async deleteMix(mixId: string, currentUser?: UserProfile | null): Promise<{ success: boolean; error?: string }> {
     const all = this.getAllMixes();
+    const mix = all.find((m) => m.id === mixId);
+    if (!mix) return { success: false, error: "Miks bulunamadı." };
+
+    const allowed = currentUser?.role === "admin" || (currentUser && mix.creatorId === currentUser.id);
+    if (!allowed) {
+      return { success: false, error: "Yalnızca kendi oluşturduğunuz miksleri silebilirsiniz." };
+    }
+
     const filtered = all.filter((m) => m.id !== mixId);
     localStorage.setItem(MIXES_STORAGE_KEY, JSON.stringify(filtered));
     try {
       await AudioStorageService.deleteMixAudio(mixId);
     } catch {}
     window.dispatchEvent(new CustomEvent("mixes-updated"));
-    return true;
+    return { success: true };
   },
 
   /**

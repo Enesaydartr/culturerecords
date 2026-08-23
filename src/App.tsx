@@ -57,7 +57,8 @@ import {
   Disc3,
   ShieldCheck,
   Menu,
-  Plus
+  Plus,
+  Trash2
 } from "lucide-react";
 
 export default function App() {
@@ -851,9 +852,31 @@ export default function App() {
                     <h4 className="text-xs font-bold text-white truncate group-hover:text-red-400 transition-colors">{m.title}</h4>
                     <p className="text-[11px] text-neutral-400">Remixer: <button type="button" onClick={() => setViewingUserId(m.creatorId)} className="text-neutral-200 font-bold hover:text-red-400 hover:underline">{m.creatorName}</button></p>
                     <p className="text-[10px] text-neutral-500 line-clamp-1 mt-0.5">{m.description}</p>
-                    <div className="flex items-center gap-3 text-[10px] text-neutral-400 mt-2">
-                      <span>❤️ {m.likesCount}</span>
-                      <span>🎧 {m.totalListens} dinlenme</span>
+                    <div className="flex items-center justify-between text-[10px] text-neutral-400 mt-2">
+                      <div className="flex items-center gap-3">
+                        <span>❤️ {m.likesCount}</span>
+                        <span>🎧 {m.totalListens} dinlenme</span>
+                      </div>
+                      {(currentUser?.role === "admin" || (currentUser && m.creatorId === currentUser.id)) && (
+                        <button
+                          type="button"
+                          onClick={async (e) => {
+                            e.stopPropagation();
+                            if (confirm(`"${m.title}" miksini silmek istediğinize emin misiniz?`)) {
+                              const res = await MixService.deleteMix(m.id, currentUser);
+                              if (res.success) {
+                                triggerToast(`"${m.title}" miksi başarıyla silindi.`);
+                              } else {
+                                alert(res.error || "Miks silinemedi.");
+                              }
+                            }
+                          }}
+                          className="p-1 text-neutral-500 hover:text-red-500 transition-colors cursor-pointer"
+                          title={currentUser?.role === "admin" ? "Yönetici Olarak Sil" : "Miksini Sil"}
+                        >
+                          <Trash2 className="h-3.5 w-3.5" />
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>

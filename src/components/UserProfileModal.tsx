@@ -19,7 +19,8 @@ import {
   Play,
   ShieldCheck,
   Sparkles,
-  Users
+  Users,
+  Trash2
 } from "lucide-react";
 
 interface UserProfileModalProps {
@@ -243,19 +244,37 @@ export default function UserProfileModal({
                     </div>
                   </div>
 
-                  {m.audioUrl && (
-                    <button
-                      type="button"
-                      onClick={async () => {
-                        const mixTrack = await MixService.getPlayableTrackForMix(m);
-                        if (onTrackPlay) onTrackPlay(mixTrack);
-                      }}
-                      className="p-1.5 bg-white/10 hover:bg-red-600 text-white transition-all shrink-0"
-                      title="Miksi Çal"
-                    >
-                      <Play className="h-3.5 w-3.5 fill-current" />
-                    </button>
-                  )}
+                  <div className="flex items-center gap-1.5 shrink-0">
+                    {m.audioUrl && (
+                      <button
+                        type="button"
+                        onClick={async () => {
+                          const mixTrack = await MixService.getPlayableTrackForMix(m);
+                          if (onTrackPlay) onTrackPlay(mixTrack);
+                        }}
+                        className="p-1.5 bg-white/10 hover:bg-red-600 text-white transition-all"
+                        title="Miksi Çal"
+                      >
+                        <Play className="h-3.5 w-3.5 fill-current" />
+                      </button>
+                    )}
+
+                    {(currentUser?.role === "admin" || (currentUser && m.creatorId === currentUser.id)) && (
+                      <button
+                        type="button"
+                        onClick={async (e) => {
+                          e.stopPropagation();
+                          if (confirm(`"${m.title}" miksini silmek istediğinize emin misiniz?`)) {
+                            await MixService.deleteMix(m.id, currentUser);
+                          }
+                        }}
+                        className="p-1.5 text-neutral-500 hover:text-red-500 hover:bg-white/5 transition-all"
+                        title={currentUser?.role === "admin" ? "Yönetici Olarak Sil" : "Miksini Sil"}
+                      >
+                        <Trash2 className="h-3.5 w-3.5" />
+                      </button>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>

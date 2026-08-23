@@ -510,7 +510,24 @@ export default function RightSidebarDrawer({
                           <span>{m.totalListens}</span>
                         </span>
                       </div>
-                      <span className="text-neutral-500">{new Date(m.createdAt).toLocaleDateString("tr-TR")}</span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-neutral-500">{new Date(m.createdAt).toLocaleDateString("tr-TR")}</span>
+                        {(currentUser?.role === "admin" || (currentUser && m.creatorId === currentUser.id)) && (
+                          <button
+                            type="button"
+                            onClick={async (e) => {
+                              e.stopPropagation();
+                              if (confirm(`"${m.title}" miksini silmek istediğinize emin misiniz?`)) {
+                                await MixService.deleteMix(m.id, currentUser);
+                              }
+                            }}
+                            className="p-1 text-neutral-500 hover:text-red-500 transition-colors"
+                            title={currentUser?.role === "admin" ? "Yönetici Olarak Sil" : "Miksini Sil"}
+                          >
+                            <Trash2 className="h-3.5 w-3.5" />
+                          </button>
+                        )}
+                      </div>
                     </div>
                   </div>
                 );
