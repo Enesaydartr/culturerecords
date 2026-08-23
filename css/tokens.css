@@ -1,0 +1,152 @@
+/**
+ * DTCG 3-Tier Design Tokens
+ * ERAY067 × MANSUR Official Digital Hub
+ * Archetype: Dark-Tech / Cinematic / Street-Luxury Drill
+ * Compliant with ux-ui-agent-skills-main Design System
+ */
+
+:root {
+  /* ==========================================================================
+     TIER 1: PRIMITIVE TOKENS (Raw values, never consumed directly by components)
+     ========================================================================== */
+  
+  /* Color Primitives - Neutrals */
+  --primitive-color-void: #060709;
+  --primitive-color-zinc-950: #0c0e14;
+  --primitive-color-zinc-900: #141721;
+  --primitive-color-zinc-850: #1a1e2b;
+  --primitive-color-zinc-800: #232838;
+  --primitive-color-zinc-700: #333a4d;
+  --primitive-color-zinc-600: #4b556b;
+  --primitive-color-zinc-400: #94a3b8;
+  --primitive-color-zinc-300: #cbd5e1;
+  --primitive-color-zinc-200: #e2e8f0;
+  --primitive-color-zinc-100: #f1f5f9;
+  --primitive-color-zinc-50: #f8fafc;
+  --primitive-color-white: #ffffff;
+
+  /* Color Primitives - Brand Accents */
+  --primitive-color-crimson-500: #ff2a55;
+  --primitive-color-crimson-400: #ff4d70;
+  --primitive-color-crimson-600: #e01740;
+  --primitive-color-crimson-900: #4a0413;
+  --primitive-color-amber-500: #f59e0b;
+  --primitive-color-amber-400: #fbbf24;
+  --primitive-color-amber-600: #d97706;
+  --primitive-color-cyan-500: #06b6d4;
+  --primitive-color-cyan-400: #22d3ee;
+  --primitive-color-emerald-500: #10b981;
+
+  /* Typography Primitives */
+  --primitive-font-display: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --primitive-font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --primitive-font-mono: 'JetBrains Mono', 'Space Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Spacing Scale (8pt Grid) */
+  --primitive-space-0: 0px;
+  --primitive-space-1: 4px;
+  --primitive-space-2: 8px;
+  --primitive-space-3: 12px;
+  --primitive-space-4: 16px;
+  --primitive-space-5: 20px;
+  --primitive-space-6: 24px;
+  --primitive-space-8: 32px;
+  --primitive-space-10: 40px;
+  --primitive-space-12: 48px;
+  --primitive-space-16: 64px;
+  --primitive-space-20: 80px;
+  --primitive-space-24: 96px;
+  --primitive-space-32: 128px;
+
+  /* Radius Primitives */
+  --primitive-radius-none: 0px;
+  --primitive-radius-xs: 4px;
+  --primitive-radius-sm: 8px;
+  --primitive-radius-md: 12px;
+  --primitive-radius-lg: 16px;
+  --primitive-radius-xl: 24px;
+  --primitive-radius-2xl: 32px;
+  --primitive-radius-full: 9999px;
+
+  /* Motion Primitives */
+  --primitive-duration-fast: 150ms;
+  --primitive-duration-normal: 250ms;
+  --primitive-duration-slow: 400ms;
+  --primitive-duration-deliberate: 700ms;
+  --primitive-ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+  --primitive-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --primitive-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Elevation Shadows */
+  --primitive-shadow-subtle: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  --primitive-shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.6), 0 2px 6px -1px rgba(0, 0, 0, 0.5);
+  --primitive-shadow-glow-crimson: 0 0 35px -5px rgba(255, 42, 85, 0.35);
+  --primitive-shadow-glow-amber: 0 0 35px -5px rgba(245, 158, 11, 0.35);
+  --primitive-shadow-glow-cyan: 0 0 30px -5px rgba(6, 182, 212, 0.3);
+
+  /* ==========================================================================
+     TIER 2: SEMANTIC TOKENS (Purpose-driven aliases mapping meaning to UI)
+     ========================================================================== */
+
+  /* Surfaces */
+  --semantic-surface-canvas: var(--primitive-color-void);
+  --semantic-surface-page: var(--primitive-color-zinc-950);
+  --semantic-surface-card: var(--primitive-color-zinc-900);
+  --semantic-surface-card-hover: var(--primitive-color-zinc-850);
+  --semantic-surface-elevated: var(--primitive-color-zinc-800);
+  --semantic-surface-glass: rgba(18, 21, 30, 0.75);
+  --semantic-surface-glass-border: rgba(255, 255, 255, 0.09);
+  --semantic-surface-glass-border-glow: rgba(255, 42, 85, 0.35);
+
+  /* Typography Colors */
+  --semantic-text-primary: var(--primitive-color-zinc-50);
+  --semantic-text-secondary: var(--primitive-color-zinc-400);
+  --semantic-text-muted: var(--primitive-color-zinc-600);
+  --semantic-text-inverse: var(--primitive-color-void);
+  --semantic-text-accent: var(--primitive-color-crimson-400);
+  --semantic-text-amber: var(--primitive-color-amber-400);
+
+  /* Brand Action Colors */
+  --semantic-action-primary: var(--primitive-color-crimson-500);
+  --semantic-action-primary-hover: var(--primitive-color-crimson-400);
+  --semantic-action-primary-active: var(--primitive-color-crimson-600);
+  --semantic-action-primary-glow: var(--primitive-shadow-glow-crimson);
+
+  --semantic-action-secondary: var(--primitive-color-zinc-800);
+  --semantic-action-secondary-hover: var(--primitive-color-zinc-700);
+
+  --semantic-accent-amber: var(--primitive-color-amber-500);
+  --semantic-accent-cyan: var(--primitive-color-cyan-400);
+
+  /* Borders & Dividers */
+  --semantic-border-subtle: rgba(255, 255, 255, 0.08);
+  --semantic-border-default: rgba(255, 255, 255, 0.14);
+  --semantic-border-active: var(--primitive-color-crimson-500);
+  --semantic-border-focus-ring: var(--primitive-color-crimson-400);
+
+  /* Feedback / Status */
+  --semantic-status-live: var(--primitive-color-crimson-500);
+  --semantic-status-success: var(--primitive-color-emerald-500);
+  --semantic-status-vip: var(--primitive-color-amber-500);
+
+  /* ==========================================================================
+     TIER 3: COMPONENT TOKENS (Scoped definitions for exact UI elements)
+     ========================================================================== */
+
+  --component-navbar-height: 72px;
+  --component-player-height: 80px;
+  --component-card-radius: var(--primitive-radius-lg);
+  --component-button-radius: var(--primitive-radius-md);
+  --component-pill-radius: var(--primitive-radius-full);
+  --component-focus-ring: 0 0 0 2px var(--semantic-surface-page), 0 0 0 4px var(--semantic-border-focus-ring);
+}
+
+/* Reduced motion preference support (WCAG 2.3.3) */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

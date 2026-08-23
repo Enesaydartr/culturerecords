@@ -1,0 +1,28 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Duplicates & Backups
+public/assets/audio/backups/
+*.bak
+*.tmp
+scripts/test_frames/
+scripts/*.b64
+
+# Editor directories and files
+.vscode/*
+.idea
+.DS_Store
+
+# Vercel & Env
+.vercel
+.env
+.env*.local
+
+temp_audio_staging/

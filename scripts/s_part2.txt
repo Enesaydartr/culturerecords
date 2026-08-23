@@ -1,0 +1,195 @@
+export class SocialService {
+  static getGlobalMessages(roomId = 'general'): ChatMessage[] {
+    if (typeof window === 'undefined') return DEFAULT_ROOM_MESSAGES[roomId] || [];
+    const key = GLOBAL_CHAT_KEY + roomId;
+    const stored = localStorage.getItem(key);
+    if (!stored) {
+      const defaults = DEFAULT_ROOM_MESSAGES[roomId] || [];
+      localStorage.setItem(key, JSON.stringify(defaults));
+      return defaults;
+    }
+    try {
+      return JSON.parse(stored);
+    } catch {
+      return DEFAULT_ROOM_MESSAGES[roomId] || [];
+    }
+  }
+
+  static sendGlobalMessage(
+    roomId: string,
+    sender: { username: string; displayName: string; avatar: string; badge?: string },
+    payload: { text?: string; attachedTrackId?: string }
+  ): ChatMessage {
+    const msgs = this.getGlobalMessages(roomId);
+    const newMsg: ChatMessage = {
+      id: 'gm-' + Date.now(),
+      senderUsername: sender.username,
+      senderDisplayName: sender.displayName,
+      senderAvatar: sender.avatar,
+      senderBadge: sender.badge,
+      text: payload.text,
+      attachedTrackId: payload.attachedTrackId,
+      createdAt: new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })
+    };
+    msgs.push(newMsg);
+    localStorage.setItem(GLOBAL_CHAT_KEY + roomId, JSON.stringify(msgs));
+    window.dispatchEvent(new Event('global-chat-updated'));
+    return newMsg;
+  }
+
+  static getConversation(user1: string, user2: string): DirectConversation {
+    const sorted = [user1.toLowerCase(), user2.toLowerCase()].sort();
+    const key = DM_KEY + sorted[0] + '_' + sorted[1];
+    if (typeof window === 'undefined') return { partnerUsername: user2, messages: [] };
+    const stored = localStorage.getItem(key);
+    if (!stored) return { partnerUsername: user2, messages: [] };
+    try {
+      const messages = JSON.parse(stored);
+      return { partnerUsername: user2, messages };
+    } catch {
+      return { partnerUsername: user2, messages: [] };
+    }
+  }
+
+  static sendDirectMessage(
+    sender: { username: string; displayName: string; avatar: string; badge?: string },
+    recipientUsername: string,
+    payload: { text?: string; attachedTrackId?: string }
+  ): ChatMessage {
+    const sorted = [sender.username.toLowerCase(), recipientUsername.toLowerCase()].sort();
+    const key = DM_KEY + sorted[0] + '_' + sorted[1];
+    let messages: ChatMessage[] = [];
+    const stored = localStorage.getItem(key);
+    if (stored) {
+      try { messages = JSON.parse(stored); } catch {}
+    }
+    const newMsg: ChatMessage = {
+      id: 'dm-' + Date.now(),
+      senderUsername: sender.username,
+      senderDisplayName: sender.displayName,
+      senderAvatar: sender.avatar,
+      senderBadge: sender.badge,
+      text: payload.text,
+      attachedTrackId: payload.attachedTrackId,
+      createdAt: new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })
+    };
+    messages.push(newMsg);
+    localStorage.setItem(key, JSON.stringify(messages));
+    window.dispatchEvent(new Event('direct-messages-updated'));
+    return newMsg;
+  }
+
+  static getSyncRooms(): SyncListeningRoom[] {
+    if (typeof window === 'undefined') return [];
+    const stored = localStorage.getItem(SYNC_ROOMS_KEY);
+    if (!stored) {
+      const defaults: SyncListeningRoom[] = [
+        {
+          id: 'room-1',
+          name: 'Frankfurt Drill & Trap Gecesi',
+          roomCode: 'FRANKFURT067',
+          hostUsername: 'enes',
+          currentTrackId: 'bak_ne_dicem',
+          currentTime: 0,
+          isPlaying: true,
+          participants: [
+            { username: 'enes', displayName: 'Enes (Admin)', avatar: '/assets/images/eray_mansur_alliance.jpg' },
+            { username: 'berke_rap', displayName: 'Berke K.', avatar: '/assets/images/eray_stage.jpg' }
+          ],
+          messages: [
+            {
+              id: 'srm-1',
+              senderUsername: 'enes',
+              senderDisplayName: 'Enes (Admin)',
+              senderAvatar: '/assets/images/eray_mansur_alliance.jpg',
+              text: 'Odaya hoş geldiniz, şarkı tam senkron çalıyor!',
+              createdAt: '14:00'
+            }
+          ]
+        }
+      ];
+      localStorage.setItem(SYNC_ROOMS_KEY, JSON.stringify(defaults));
+      return defaults;
+    }
+    try { return JSON.parse(stored); } catch { return []; }
+  }
+
+  static createSyncRoom(
+    host: { username: string; displayName: string; avatar: string },
+    trackId = 'bak_ne_dicem',
+    roomName = 'Senkron Dinleme Odası'
+  ): SyncListeningRoom {
+    const rooms = this.getSyncRooms();
+    const code = 'ALLIANCE-' + Math.floor(1000 + Math.random() * 9000);
+    const newRoom: SyncListeningRoom = {
+      id: 'room-' + Date.now(),
+      name: roomName,
+      roomCode: code,
+      hostUsername: host.username,
+      currentTrackId: trackId,
+      currentTime: 0,
+      isPlaying: true,
+      participants: [host],
+      messages: [
+        {
+          id: 'srm-' + Date.now(),
+          senderUsername: host.username,
+          senderDisplayName: host.displayName,
+          senderAvatar: host.avatar,
+          text: 'Oda açıldı. Birlikte dinlemeye hazırız!',
+          createdAt: new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })
+        }
+      ]
+      };
+    rooms.unshift(newRoom);
+    localStorage.setItem(SYNC_ROOMS_KEY, JSON.stringify(rooms));
+    window.dispatchEvent(new Event('sync-rooms-updated'));
+    return newRoom;
+  }
+
+  static joinRoomByCode(
+    code: string,
+    user: { username: string; displayName: string; avatar: string }
+  ): SyncListeningRoom | null {
+    const rooms = this.getSyncRooms();
+    const room = rooms.find((r) => r.roomCode.toUpperCase() === code.toUpperCase().trim());
+    if (!room) return null;
+    if (!room.participants.some((p) => p.username.toLowerCase() === user.username.toLowerCase())) {
+      room.participants.push(user);
+      localStorage.setItem(SYNC_ROOMS_KEY, JSON.stringify(rooms));
+      window.dispatchEvent(new Event('sync-rooms-updated'));
+    }
+    return room;
+  }
+
+  static updateRoomState(roomId: string, updates: Partial<SyncListeningRoom>): void {
+    const rooms = this.getSyncRooms();
+    const room = rooms.find((r) => r.id === roomId);
+    if (!room) return;
+    Object.assign(room, updates);
+    localStorage.setItem(SYNC_ROOMS_KEY, JSON.stringify(rooms));
+    window.dispatchEvent(new Event('sync-rooms-updated'));
+  }
+
+  static sendRoomMessage(
+    roomId: string,
+    sender: { username: string; displayName: string; avatar: string },
+    text: string
+  ): ChatMessage | null {
+    const rooms = this.getSyncRooms();
+    const room = rooms.find((r) => r.id === roomId);
+    if (!room) return null;
+    const msg: ChatMessage = {
+      id: 'srm-' + Date.now(),
+      senderUsername: sender.username,
+      senderDisplayName: sender.displayName,
+      senderAvatar: sender.avatar,
+      text,
+      createdAt: new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })
+    };
+    room.messages.push(msg);
+    localStorage.setItem(SYNC_ROOMS_KEY, JSON.stringify(rooms));
+    window.dispatchEvent(new Event('sync-rooms-updated'));
+    return msg;
+  }
+}

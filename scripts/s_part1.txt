@@ -1,0 +1,60 @@
+export interface ChatMessage {
+  id: string;
+  senderUsername: string;
+  senderDisplayName: string;
+  senderAvatar: string;
+  senderBadge?: string;
+  text?: string;
+  attachedTrackId?: string;
+  createdAt: string;
+}
+
+export interface DirectConversation {
+  partnerUsername: string;
+  messages: ChatMessage[];
+}
+
+export interface SyncListeningRoom {
+  id: string;
+  name: string;
+  roomCode: string;
+  hostUsername: string;
+  currentTrackId: string;
+  currentTime: number;
+  isPlaying: boolean;
+  participants: {
+    username: string;
+    displayName: string;
+    avatar: string;
+  }[];
+  messages: ChatMessage[];
+}
+
+const GLOBAL_CHAT_KEY = 'alliance_global_chat_';
+const DM_KEY = 'alliance_direct_messages_';
+const SYNC_ROOMS_KEY = 'alliance_sync_rooms';
+
+const DEFAULT_ROOM_MESSAGES: Record<string, ChatMessage[]> = {
+  general: [
+    {
+      id: 'gm-1',
+      senderUsername: 'enes',
+      senderDisplayName: 'Enes (Admin)',
+      senderAvatar: '/assets/images/eray_mansur_alliance.jpg',
+      senderBadge: '👑 ALLIANCE KURUCU',
+      text: 'Alliance platformuna ve global sohbet odamıza hoş geldiniz! Parçalar hakkında yorumlarınızı buradan paylaşabilirsiniz.',
+      attachedTrackId: 'bak_ne_dicem',
+      createdAt: '14:10'
+    },
+    {
+      id: 'gm-2',
+      senderUsername: 'berke_rap',
+      senderDisplayName: 'Berke K.',
+      senderAvatar: '/assets/images/eray_stage.jpg',
+      text: 'Frankfurt konserinde görüşmek üzere, setlist efsane görünüyor!',
+      createdAt: '14:22'
+    }
+  ],
+  concerts: [],
+  mixes: []
+};
