@@ -1,11 +1,10 @@
 /**
  * Production Audio Engine for ERAY067 x MANSUR (Culture Records)
  * High-performance HTML5 Audio Engine with Web Audio spectrum analyzer.
- * Guarantees pure real-music playback with accurate trim start/end boundaries.
+ * Guarantees pure real-music playback without synthetic glitch fallbacks.
  */
 
 import { Track } from "../data/artists";
-import { SyncedLyricsService, TrackTrim } from "../services/syncedLyricsService";
 
 export class WebAudioEngine {
   private ctx: AudioContext | null = null;
@@ -16,6 +15,7 @@ export class WebAudioEngine {
 
   // HTML5 Audio Element
   public audioEl: HTMLAudioElement | null = null;
+  private mediaSourceNode: MediaElementAudioSourceNode | null = null;
   public currentTimeSec: number = 0;
   public durationSec: number = 180;
   public onTimeUpdateCallback: ((time: number, duration: number) => void) | null = null;
@@ -33,33 +33,9 @@ export class WebAudioEngine {
       this.audioEl.addEventListener("timeupdate", () => {
         if (!this.audioEl) return;
         this.currentTimeSec = this.audioEl.currentTime;
-
-        // Check if track has trim bounds
-        const trim = this.currentTrack ? SyncedLyricsService.getTrim(this.currentTrack.id) : null;
-        if (trim && trim.endSec > trim.startSec) {
-          // If playback reaches or exceeds trim.endSec -> trigger track end
-          if (this.audioEl.currentTime >= trim.endSec) {
-            this.audioEl.pause();
-            this.audioEl.currentTime = trim.startSec;
-            this.currentTimeSec = trim.startSec;
-            this.isPlayingMusic = false;
-            if (this.onTrackEndedCallback) {
-              this.onTrackEndedCallback();
-            }
-            return;
-          }
-
-          // If playback is before trim.startSec -> seek to startSec
-          if (this.audioEl.currentTime < trim.startSec - 0.5) {
-            this.audioEl.currentTime = trim.startSec;
-            this.currentTimeSec = trim.startSec;
-          }
-        }
-
         if (this.audioEl.duration && !isNaN(this.audioEl.duration) && this.audioEl.duration > 0) {
-          this.durationSec = trim && trim.endSec > 0 ? trim.endSec : this.audioEl.duration;
+          this.durationSec = this.audioEl.duration;
         }
-
         if (this.onTimeUpdateCallback) {
           this.onTimeUpdateCallback(this.currentTimeSec, this.durationSec);
         }
@@ -67,8 +43,7 @@ export class WebAudioEngine {
 
       this.audioEl.addEventListener("durationchange", () => {
         if (this.audioEl && this.audioEl.duration && !isNaN(this.audioEl.duration)) {
-          const trim = this.currentTrack ? SyncedLyricsService.getTrim(this.currentTrack.id) : null;
-          this.durationSec = trim && trim.endSec > 0 ? trim.endSec : this.audioEl.duration;
+          this.durationSec = this.audioEl.duration;
         }
       });
 
@@ -142,20 +117,16 @@ export class WebAudioEngine {
   }
 
   public seek(pct: number) {
-    if (!this.audioEl || this.durationSec <= 0) return;
-    const trim = this.currentTrack ? SyncedLyricsService.getTrim(this.currentTrack.id) : null;
-    const minSec = trim ? trim.startSec : 0;
-    const maxSec = trim && trim.endSec > trim.startSec ? trim.endSec : this.durationSec;
-    const targetSec = minSec + pct * (maxSec - minSec);
-    this.seekToSeconds(targetSec);
+    if (this.audioEl && this.durationSec > 0) {
+      const targetSec = Math.max(0, Math.min(this.durationSec, pct * this.durationSec));
+      this.audioEl.currentTime = targetSec;
+      this.currentTimeSec = targetSec;
+    }
   }
 
   public seekToSeconds(targetSec: number) {
-    if (this.audioEl) {
-      const trim = this.currentTrack ? SyncedLyricsService.getTrim(this.currentTrack.id) : null;
-      const minSec = trim ? trim.startSec : 0;
-      const maxSec = trim && trim.endSec > trim.startSec ? trim.endSec : (this.durationSec || 180);
-      const clamped = Math.max(minSec, Math.min(maxSec, targetSec));
+    if (this.audioEl && this.durationSec > 0) {
+      const clamped = Math.max(0, Math.min(this.durationSec, targetSec));
       this.audioEl.currentTime = clamped;
       this.currentTimeSec = clamped;
     }
@@ -166,56 +137,26 @@ export class WebAudioEngine {
   }
 
   public getDuration(): number {
-    const trim = this.currentTrack ? SyncedLyricsService.getTrim(this.currentTrack.id) : null;
-    if (trim && trim.endSec > 0) return trim.endSec;
     return this.audioEl && this.audioEl.duration && !isNaN(this.audioEl.duration)
       ? this.audioEl.duration
       : this.durationSec;
-  }
-
-  private blobCache: Map<string, string> = new Map();
-
-  private async _getPlayableAudioUrl(trackId: string): Promise<string> {
-    const rawPath = `/assets/audio/${trackId}.mp4`;
-    if (this.blobCache.has(trackId)) {
-      return this.blobCache.get(trackId)!;
-    }
-    try {
-      const res = await fetch(rawPath, {
-        headers: { "ngrok-skip-browser-warning": "true" }
-      });
-      if (res.ok) {
-        const blob = await res.blob();
-        if (blob.type.includes("video") || blob.type.includes("audio") || blob.size > 50000) {
-          const blobUrl = URL.createObjectURL(blob);
-          this.blobCache.set(trackId, blobUrl);
-          return blobUrl;
-        }
-      }
-    } catch {
-      // fallback to raw path
-    }
-    return rawPath;
   }
 
   private _resolveAudioPath(trackId: string): string {
     return `/assets/audio/${trackId}.mp4`;
   }
 
-  public async loadTrack(track: Track) {
+  public loadTrack(track: Track) {
     this.currentTrack = track;
-    const trim = SyncedLyricsService.getTrim(track.id);
-    const startPosition = trim ? trim.startSec : 0;
-    this.durationSec = trim && trim.endSec > 0 ? trim.endSec : (track.durationSec || 180);
-    this.currentTimeSec = startPosition;
-
+    this.durationSec = track.durationSec || 180;
+    this.currentTimeSec = 0;
     if (this.audioEl) {
-      const src = await this._getPlayableAudioUrl(track.id);
+      const src = this._resolveAudioPath(track.id);
       if (this.audioEl.src !== src && !this.audioEl.src.endsWith(src)) {
         this.audioEl.src = src;
         this.audioEl.load();
       }
-      this.audioEl.currentTime = startPosition;
+      this.audioEl.currentTime = 0;
     }
   }
 
@@ -242,28 +183,20 @@ export class WebAudioEngine {
     } catch {}
   }
 
-  public async startMusic(track?: Track) {
+  public startMusic(track?: Track) {
     const targetTrack = track || this.currentTrack;
     if (!targetTrack) return;
     this.init();
     this.currentTrack = targetTrack;
-
-    const trim = SyncedLyricsService.getTrim(targetTrack.id);
-    this.durationSec = trim && trim.endSec > 0 ? trim.endSec : (targetTrack.durationSec || 180);
+    this.durationSec = targetTrack.durationSec || 180;
 
     if (this.audioEl) {
-      const src = await this._getPlayableAudioUrl(targetTrack.id);
+      const src = this._resolveAudioPath(targetTrack.id);
       const isSameSrc = this.audioEl.src.endsWith(src) || this.audioEl.src === src;
       if (!isSameSrc) {
         this.audioEl.src = src;
         this.audioEl.load();
       }
-
-      // Check start position with trim
-      if (trim && (this.audioEl.currentTime < trim.startSec || this.audioEl.currentTime >= trim.endSec)) {
-        this.audioEl.currentTime = trim.startSec;
-      }
-
       this.audioEl.volume = this.isMuted ? 0 : this.volume;
       this.audioEl
         .play()
@@ -297,10 +230,6 @@ export class WebAudioEngine {
   public resumeMusic() {
     this.init();
     if (this.audioEl && this.audioEl.src) {
-      const trim = this.currentTrack ? SyncedLyricsService.getTrim(this.currentTrack.id) : null;
-      if (trim && (this.audioEl.currentTime < trim.startSec || this.audioEl.currentTime >= trim.endSec)) {
-        this.audioEl.currentTime = trim.startSec;
-      }
       this.audioEl
         .play()
         .then(() => {
@@ -317,7 +246,7 @@ export class WebAudioEngine {
   }
 
   public setOnDurationChange(cb: (dur: number) => void) {
-    // duration hook
+    // duration callback hook
   }
 
   public setOnTrackEnded(cb: () => void) {

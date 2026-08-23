@@ -1,5 +1,3 @@
-import { BUILTIN_SYNCED_LYRICS, BUILTIN_TRIMS } from "@/data/backupLyricsData";
-
 export interface SyncedLine {
   time: number; // in seconds
   text: string;
@@ -14,8 +12,7 @@ const STORAGE_KEY_PREFIX = "eray_mansur_synced_lyrics_";
 const TRIM_KEY_PREFIX = "eray_mansur_trim_";
 
 export const SyncedLyricsService = {
-  getSyncedLyrics(trackId: string, fallbackLyrics?: string, durationSec: number = 180, embeddedSyncedLyrics?: SyncedLine[]): SyncedLine[] {
-    // 1. Check user custom edits in localStorage
+  getSyncedLyrics(trackId: string, fallbackLyrics?: string, durationSec: number = 180): SyncedLine[] {
     try {
       const stored = localStorage.getItem(STORAGE_KEY_PREFIX + trackId);
       if (stored) {
@@ -28,15 +25,6 @@ export const SyncedLyricsService = {
       // ignore
     }
 
-    // 2. Check embedded in track or built-in verified backup database (33 tracks)
-    if (embeddedSyncedLyrics && embeddedSyncedLyrics.length > 0) {
-      return embeddedSyncedLyrics;
-    }
-    if (BUILTIN_SYNCED_LYRICS[trackId] && BUILTIN_SYNCED_LYRICS[trackId].length > 0) {
-      return BUILTIN_SYNCED_LYRICS[trackId];
-    }
-
-    // 3. Fallback calculation if no sync data exists
     if (fallbackLyrics) {
       const rawLines = fallbackLyrics
         .split("\n")
@@ -45,12 +33,14 @@ export const SyncedLyricsService = {
 
       if (rawLines.length === 0) return [];
 
-      const introTime = 7.0;
-      const effectiveDuration = Math.max(20, (durationSec || 180) - 12.0);
+      // Proportional timing across total song duration
+      const introTime = 7.0; // standard drill/trap intro
+      const effectiveDuration = Math.max(20, (durationSec || 180) - 12.0); // leave 12s outro
       const availableTime = Math.max(10, effectiveDuration - introTime);
       const timePerLine = availableTime / Math.max(1, rawLines.length);
 
       return rawLines.map((text, i) => {
+        // Tag markers like (Nakarat), (Giriş) get small pause offset
         const isHeader = text.startsWith("(") || text.startsWith("[");
         const calcTime = Math.round((introTime + i * timePerLine) * 10) / 10;
         return {
@@ -65,11 +55,10 @@ export const SyncedLyricsService = {
 
   hasCustomSync(trackId: string): boolean {
     try {
-      if (localStorage.getItem(STORAGE_KEY_PREFIX + trackId)) return true;
+      return !!localStorage.getItem(STORAGE_KEY_PREFIX + trackId);
     } catch {
-      // ignore
+      return false;
     }
-    return !!(BUILTIN_SYNCED_LYRICS[trackId] && BUILTIN_SYNCED_LYRICS[trackId].length > 0);
   },
 
   saveSyncedLyrics(trackId: string, lines: SyncedLine[]): boolean {
@@ -102,9 +91,6 @@ export const SyncedLyricsService = {
     } catch {
       // ignore
     }
-    if (BUILTIN_TRIMS[trackId]) {
-      return BUILTIN_TRIMS[trackId];
-    }
     return null;
   },
 
@@ -126,95 +112,49 @@ export const SyncedLyricsService = {
     }
   },
 
-  // Restore backup data
-  restoreAllBackupData(data: Record<string, any>): boolean {
-    return this.importBackupData(data) > 0;
-  },
-
-  // Export to standard LRC format
-  exportLrc(lines: SyncedLine[]): string {
-    return lines
-      .map((line) => {
-        const m = Math.floor(line.time / 60);
-        const s = Math.floor(line.time % 60);
-        const ms = Math.floor((line.time % 1) * 100);
-        const timeTag = `[${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}.${String(ms).padStart(2, "0")}]`;
-        return `${timeTag} ${line.text}`;
-      })
-      .join("\n");
-  },
-
-  // Parse standard LRC format
-  parseLrc(lrcText: string): SyncedLine[] {
-    const lines = lrcText.split("\n");
-    const result: SyncedLine[] = [];
-    const lrcRegex = /\[(\d{2}):(\d{2})(?:\.(\d{2,3}))?\](.*)/;
-
-    for (const raw of lines) {
-      const match = raw.match(lrcRegex);
-      if (match) {
-        const min = parseInt(match[1], 10);
-        const sec = parseInt(match[2], 10);
-        const frac = match[3] ? parseFloat("0." + match[3]) : 0;
-        const time = min * 60 + sec + frac;
-        const text = match[4].trim();
-        result.push({ time, text });
-      }
-    }
-    return result.sort((a, b) => a.time - b.time);
-  },
-
-  // Export all current lyrics & trims into a backup JSON object
+  // Shift all timestamps by an offset (positive or negative seconds)
   getAllBackupData(): Record<string, any> {
     const data: Record<string, any> = {};
-    
-    // First populate from built-in
-    Object.keys(BUILTIN_SYNCED_LYRICS).forEach((trackId) => {
-      data[trackId] = {
-        lyrics: BUILTIN_SYNCED_LYRICS[trackId],
-        trim: BUILTIN_TRIMS[trackId] || null
-      };
-    });
-
-    // Override with any localStorage custom edits
-    try {
-      for (let i = 0; i < localStorage.length; i++) {
-        const k = localStorage.key(i);
-        if (k && k.startsWith(STORAGE_KEY_PREFIX)) {
-          const trackId = k.replace(STORAGE_KEY_PREFIX, "");
-          if (!data[trackId]) data[trackId] = {};
-          data[trackId].lyrics = JSON.parse(localStorage.getItem(k) || "[]");
-        } else if (k && k.startsWith(TRIM_KEY_PREFIX)) {
-          const trackId = k.replace(TRIM_KEY_PREFIX, "");
-          if (!data[trackId]) data[trackId] = {};
-          data[trackId].trim = JSON.parse(localStorage.getItem(k) || "null");
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k && (k.startsWith(STORAGE_KEY_PREFIX) || k.startsWith(TRIM_KEY_PREFIX))) {
+        try {
+          data[k] = JSON.parse(localStorage.getItem(k) || "");
+        } catch {
+          data[k] = localStorage.getItem(k);
         }
       }
-    } catch {
-      // ignore
     }
-
     return data;
   },
 
-  // Import backup JSON into local storage
-  importBackupData(backupJson: Record<string, any>): number {
-    let importedCount = 0;
+  restoreAllBackupData(backupObj: Record<string, any>): boolean {
     try {
-      Object.keys(backupJson).forEach((trackId) => {
-        const item = backupJson[trackId];
-        if (item.lyrics && Array.isArray(item.lyrics)) {
-          localStorage.setItem(STORAGE_KEY_PREFIX + trackId, JSON.stringify(item.lyrics));
-          importedCount++;
-        }
-        if (item.trim) {
-          localStorage.setItem(TRIM_KEY_PREFIX + trackId, JSON.stringify(item.trim));
+      Object.entries(backupObj).forEach(([k, v]) => {
+        if (k.startsWith(STORAGE_KEY_PREFIX) || k.startsWith(TRIM_KEY_PREFIX)) {
+          localStorage.setItem(k, typeof v === "string" ? v : JSON.stringify(v));
         }
       });
-      window.dispatchEvent(new CustomEvent("synced-lyrics-updated"));
-    } catch (e) {
-      console.error("Error importing backup lyrics", e);
+      window.dispatchEvent(new CustomEvent("synced-lyrics-updated", { detail: {} }));
+      return true;
+    } catch {
+      return false;
     }
-    return importedCount;
+  },
+
+  exportLrc(lines: SyncedLine[]): string {
+    return lines.map(l => {
+      const mins = Math.floor(l.time / 60).toString().padStart(2, "0");
+      const secs = Math.floor(l.time % 60).toString().padStart(2, "0");
+      const ms = Math.floor((l.time % 1) * 100).toString().padStart(2, "0");
+      return `[${mins}:${secs}.${ms}]${l.text}`;
+    }).join("\n");
+  },
+
+  shiftTimestamps(lines: SyncedLine[], offsetSec: number): SyncedLine[] {
+    return lines.map((line) => ({
+      ...line,
+      time: Math.max(0, Math.round((line.time + offsetSec) * 10) / 10)
+    }));
   }
 };

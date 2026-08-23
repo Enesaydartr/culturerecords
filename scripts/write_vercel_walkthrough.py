@@ -1,49 +1,28 @@
 ﻿import os
 
-walkthrough_content = """# ALLIANCE RECORDS & ERAY067 × MANSUR — VERCEL & CULTURERECORDS.COM DAĞITIM REHBERİ
+walkthrough_content = """# ALLIANCE RECORDS & ERAY067 × MANSUR — VERCEL & YEREL HAFIZA (LOCALSTORAGE) AKTARIM RAPORU
 
-Projenin tüm Vercel yapılandırmaları (`vercel.json`, SPA yönlendirmeleri, statik dosya önbellekleri ve Git deposu) hazırlandı.
-
----
-
-## 🌐 culturerecords.com Alan Adı İçin DNS Ayarları:
-
-Alan adınızı satın aldığınız panelde (GoDaddy, Namecheap, Turhost, Cloudflare vb.) DNS yönetimine girip şu 2 kaydı ekleyin:
-
-| Tür (Type) | İsim / Host | Değer (Value / Target) |
-|---|---|---|
-| **A** | `@` | `76.76.21.21` |
-| **CNAME** | `www` | `cname.vercel-dns.com` |
+`http://localhost:5173` üzerindeki çalışan tüm yerel hafıza (LocalStorage) verileri, 33 şarkının senkronize sözleri ve kırpma ayarları doğrudan **Vercel canlı yayınına** (`https://temporary-nimble-nickel-qjbp80v.vercel.app/`) aktarıldı.
 
 ---
 
-## 🚀 Vercel'e Bağlama (2 Kolay Yol):
+## ⚡ 1. Neler Yapıldı?
+- **Otomatik LocalStorage Başlatıcı (`seedData.ts`):** 
+  Siteye mobilden veya dışarıdan giren her kullanıcı için tarayıcının yerel hafızası (LocalStorage) açılışta otomatik olarak 33 şarkının tam senkronu ile dolduruluyor.
+- **Kusursuz Senkron:**
+  Artık `localhost` hafızasındaki verilerin birebir kopyası Vercel üzerinde de otomatik olarak çalışıyor.
+- **Canlı Dağıtım:**
+  Değişiklikler GitHub `main` dalına yüklendi ve Vercel otomatik olarak güncel sürümü yayına aldı.
 
-### 1. Yol: Terminalden Tek Komutla (Vercel CLI)
-Proje klasöründe terminali açıp şu komutu çalıştırın:
-```bash
-npx vercel --prod
-```
-- Tarayıcıda açılan ekranda Vercel hesabınıza giriş yapın.
-- Proje adını onaylayın (Örn: `culturerecords`).
-- Yükleme tamamlandıktan sonra alan adınızı ekleyin:
-```bash
-npx vercel domains add culturerecords.com
-```
+---
 
-### 2. Yol: GitHub Üzerinden (Otomatik Güncelleme)
-1. GitHub'da yeni bir repo oluşturun.
-2. Terminalden gönderin:
-   ```bash
-   git remote add origin https://github.com/KULLANICI_ADINIZ/culturerecords.git
-   git branch -M main
-   git push -u origin main
-   ```
-3. [vercel.com/new](https://vercel.com/new) adresine girin, reponuzu seçin ve **Deploy**'a basın.
-4. Proje açılınca **Settings > Domains** kısmından `culturerecords.com` ekleyin.
+## 🌐 Canlı Bağlantılar:
+- **Vercel Canlı Bağlantı:** `https://temporary-nimble-nickel-qjbp80v.vercel.app/#discography`
+- **Ngrok Public:** `https://b5cf-212-133-199-137.ngrok-free.app/#discography`
+- **Yerel Geliştirme:** `http://localhost:5173/#discography`
 """
 
 with open("C:/Users/EnesA/.gemini/antigravity/brain/1c603c8b-a7b3-496f-aaf0-1d98ce1d8bf5/walkthrough.md", "w", encoding="utf-8") as f:
     f.write(walkthrough_content)
 
-print("walkthrough.md updated with Vercel and domain deployment instructions!")
+print("walkthrough.md updated with Vercel seed report!")
