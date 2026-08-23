@@ -1,4 +1,4 @@
-import React from 'react'
+﻿content = """import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
@@ -12,3 +12,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <App />
   </React.StrictMode>,
 )
+"""
+
+with open("src/main.tsx", "w", encoding="utf-8") as f:
+    f.write(content)
+
+print("src/main.tsx updated with initializeLocalStorageSeed()!")
