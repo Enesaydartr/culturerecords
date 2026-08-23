@@ -22,6 +22,9 @@ export interface Track {
   youtubeId: string;
   lyrics: string;
   syncedLyrics?: { time: number; text: string }[];
+  audioUrl?: string;
+  customAudioUrl?: string;
+  isMix?: boolean;
 }
 
 export interface Artist {

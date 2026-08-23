@@ -12,6 +12,7 @@ import { audioEngine } from "@/audio/engine";
 import { AuthService, UserProfile } from "@/services/authService";
 import { PlaylistService, SongStats } from "@/services/playlistService";
 import { SyncedLyricsService } from "@/services/syncedLyricsService";
+import { TicketService } from "@/services/ticketService";
 
 import VinylAlbumCard from "@/components/ui/great-ui-vinyl-album-card";
 import Character3DScrollShowcase from "@/components/ui/character-3d-scroll-showcase";
@@ -91,8 +92,10 @@ export default function App() {
   const [liveConcerts, setLiveConcerts] = useState<TourDate[]>(TOUR_DATES);
   const [isLiveSyncing, setIsLiveSyncing] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [activeCustomTrack, setActiveCustomTrack] = useState<Track | null>(null);
+  const [ticketSales, setTicketSales] = useState<Record<string, number>>(() => TicketService.getAllSales());
 
-  const currentTrack = PLAYLIST[currentTrackIndex];
+  const currentTrack = activeCustomTrack || PLAYLIST[currentTrackIndex];
   const [currentStats, setCurrentStats] = useState<SongStats>(PlaylistService.getSongStats(currentTrack.id, currentUser?.id));
 
   const triggerToast = (msg: string) => {
@@ -101,6 +104,15 @@ export default function App() {
       setToastMessage(null);
     }, 2800);
   };
+
+  // Ticket sales event listener
+  useEffect(() => {
+    const handleSalesUpdate = () => {
+      setTicketSales(TicketService.getAllSales());
+    };
+    window.addEventListener("ticket-sales-updated", handleSalesUpdate);
+    return () => window.removeEventListener("ticket-sales-updated", handleSalesUpdate);
+  }, []);
 
   // Auth state listener
   useEffect(() => {
@@ -221,12 +233,19 @@ export default function App() {
 
   const playTrack = (track: Track) => {
     const idx = PLAYLIST.findIndex((t) => t.id === track.id);
-    const targetIdx = idx !== -1 ? idx : 0;
-    setCurrentTrackIndex(targetIdx);
-    setCurrentTimeSec(0);
-
-    audioEngine.loadTrack(PLAYLIST[targetIdx]);
-    audioEngine.startMusic();
+    if (idx !== -1) {
+      setActiveCustomTrack(null);
+      setCurrentTrackIndex(idx);
+      setCurrentTimeSec(0);
+      audioEngine.loadTrack(PLAYLIST[idx]);
+      audioEngine.startMusic(PLAYLIST[idx]);
+    } else {
+      // Custom Mix or Dynamic Track
+      setActiveCustomTrack(track);
+      setCurrentTimeSec(0);
+      audioEngine.loadTrack(track);
+      audioEngine.startMusic(track);
+    }
     setIsPlaying(true);
   };
 
@@ -237,7 +256,7 @@ export default function App() {
     } else {
       if (currentTimeSec === 0) {
         audioEngine.loadTrack(currentTrack);
-        audioEngine.startMusic();
+        audioEngine.startMusic(currentTrack);
       } else {
         audioEngine.resume();
       }
@@ -246,6 +265,7 @@ export default function App() {
   };
 
   const handleNextTrack = () => {
+    setActiveCustomTrack(null);
     let nextIdx: number;
     if (isShuffle) {
       nextIdx = Math.floor(Math.random() * PLAYLIST.length);
@@ -255,17 +275,18 @@ export default function App() {
     setCurrentTrackIndex(nextIdx);
     setCurrentTimeSec(0);
     audioEngine.loadTrack(PLAYLIST[nextIdx]);
-    audioEngine.startMusic();
+    audioEngine.startMusic(PLAYLIST[nextIdx]);
     setIsPlaying(true);
   };
 
   const handlePrevTrack = () => {
+    setActiveCustomTrack(null);
     let prevIdx = currentTrackIndex - 1;
     if (prevIdx < 0) prevIdx = PLAYLIST.length - 1;
     setCurrentTrackIndex(prevIdx);
     setCurrentTimeSec(0);
     audioEngine.loadTrack(PLAYLIST[prevIdx]);
-    audioEngine.startMusic();
+    audioEngine.startMusic(PLAYLIST[prevIdx]);
     setIsPlaying(true);
   };
 
@@ -782,39 +803,53 @@ export default function App() {
           </div>
 
           <div className="space-y-3">
-            {liveConcerts.map((concert) => (
-              <div
-                key={concert.id}
-                className="p-5 border border-white/10 bg-black/40 hover:border-red-500/40 transition-all flex flex-wrap items-center justify-between gap-4"
-              >
-                <div className="flex items-center gap-4 min-w-[220px]">
-                  <div className="h-12 w-12 bg-white/5 border border-white/10 flex flex-col items-center justify-center text-center font-mono">
-                    <span className="text-[10px] text-red-500 font-bold uppercase">{concert.date.split(" ")[1]}</span>
-                    <span className="text-sm font-black text-white">{concert.date.split(" ")[0]}</span>
-                  </div>
-                  <div>
-                    <h4 className="text-base font-black text-white uppercase">{concert.city}</h4>
-                    <p className="text-xs text-neutral-400">{concert.venue}</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-6 text-xs text-neutral-400">
-                  <span className="flex items-center gap-1.5"><Clock className="h-3.5 w-3.5" /> {concert.time}</span>
-                  <span className="px-2.5 py-1 bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 font-bold text-[10px] uppercase">
-                    ✓ SATIŞTA
-                  </span>
-                </div>
-
-                <a
-                  href={concert.bubiletUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="px-6 py-2.5 bg-red-600 hover:bg-red-700 text-white font-mono text-xs font-black uppercase tracking-wider transition-colors inline-flex items-center gap-2 shadow-md"
+            {liveConcerts.map((concert) => {
+              const soldCount = ticketSales[concert.id] || 0;
+              return (
+                <div
+                  key={concert.id}
+                  className="p-5 border border-white/10 bg-black/40 hover:border-red-500/40 transition-all flex flex-wrap items-center justify-between gap-4"
                 >
-                  <Ticket className="h-4 w-4" /> BİLET AL ➔
-                </a>
-              </div>
-            ))}
+                  <div className="flex items-center gap-4 min-w-[220px]">
+                    <div className="h-12 w-12 bg-white/5 border border-white/10 flex flex-col items-center justify-center text-center font-mono">
+                      <span className="text-[10px] text-red-500 font-bold uppercase">{concert.date.split(" ")[1]}</span>
+                      <span className="text-sm font-black text-white">{concert.date.split(" ")[0]}</span>
+                    </div>
+                    <div>
+                      <h4 className="text-base font-black text-white uppercase">{concert.city}</h4>
+                      <p className="text-xs text-neutral-400">{concert.venue}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-xs text-neutral-400">
+                    <span className="flex items-center gap-1.5"><Clock className="h-3.5 w-3.5" /> {concert.time}</span>
+                    
+                    {/* Real Click-Based Ticket Sold Counter */}
+                    <div className="flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 text-neutral-300 font-mono">
+                      <Ticket className="h-3.5 w-3.5 text-red-500" />
+                      <span>Satılan Bilet: <strong className="text-white text-sm font-bold">{soldCount}</strong></span>
+                    </div>
+
+                    <span className="px-2.5 py-1 bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 font-bold text-[10px] uppercase">
+                      ✓ SATIŞTA
+                    </span>
+                  </div>
+
+                  <a
+                    href={concert.bubiletUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={() => {
+                      const newCount = TicketService.recordTicketClick(concert.id);
+                      triggerToast(`🎫 "${concert.city}" konseri için bilet talebi kaydedildi! Toplam Satış: ${newCount}`);
+                    }}
+                    className="px-6 py-2.5 bg-red-600 hover:bg-red-700 text-white font-mono text-xs font-black uppercase tracking-wider transition-colors inline-flex items-center gap-2 shadow-md cursor-pointer"
+                  >
+                    <Ticket className="h-4 w-4" /> BİLET AL ➔
+                  </a>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

@@ -1,3 +1,6 @@
+import { Track, PLAYLIST } from "../data/artists";
+import { AudioStorageService } from "./audioStorageService";
+
 export interface CommunityMix {
   id: string;
   title: string;
@@ -159,11 +162,66 @@ export const MixService = {
     }
   },
 
-  deleteMix(mixId: string): boolean {
+  async deleteMix(mixId: string): Promise<boolean> {
     const all = this.getAllMixes();
     const filtered = all.filter((m) => m.id !== mixId);
     localStorage.setItem(MIXES_STORAGE_KEY, JSON.stringify(filtered));
+    try {
+      await AudioStorageService.deleteMixAudio(mixId);
+    } catch {}
     window.dispatchEvent(new CustomEvent("mixes-updated"));
     return true;
+  },
+
+  /**
+   * Resolve and generate a full playable Track object from a CommunityMix,
+   * checking IndexedDB for uploaded custom audio first.
+   */
+  async getPlayableTrackForMix(m: CommunityMix): Promise<Track> {
+    let audioSrc = m.audioUrl;
+    try {
+      const idbUrl = await AudioStorageService.getMixAudioUrl(m.id);
+      if (idbUrl) {
+        audioSrc = idbUrl;
+      }
+    } catch (e) {
+      console.warn("[MixService] Error getting audio from storage:", e);
+    }
+
+    if (!audioSrc && m.usedTrackIds.length > 0) {
+      audioSrc = `/assets/audio/${m.usedTrackIds[0]}.mp4`;
+    }
+
+    const firstTrack = m.usedTrackIds.length > 0 ? PLAYLIST.find((t) => t.id === m.usedTrackIds[0]) : null;
+
+    const mixTrack: Track = {
+      id: m.id,
+      title: m.title,
+      artist: `${m.creatorName} (Remix)`,
+      album: "Topluluk Miksleri",
+      duration: firstTrack?.duration || "3:00",
+      currentTime: "00:00",
+      progress: 0,
+      durationSec: firstTrack?.durationSec || 180,
+      bpm: firstTrack?.bpm || 140,
+      key: firstTrack?.key || "Auto",
+      genre: "Community Remix",
+      producers: m.creatorName,
+      mixMaster: "Alliance Community",
+      badge: "TOPLULUK MİKSİ",
+      category: "all",
+      releaseDate: new Date(m.createdAt).toISOString().slice(0, 10),
+      releaseYear: 2026,
+      image: m.coverImage || "/assets/images/alliance_cover.jpg",
+      spotifyUrl: firstTrack?.spotifyUrl || "",
+      embedUrl: firstTrack?.embedUrl || "",
+      youtubeId: firstTrack?.youtubeId || "",
+      lyrics: `[00:00.00] 🎧 ${m.title} (Topluluk Miksi)\n[00:04.00] 👤 Remixer: ${m.creatorName}\n[00:08.00] ⚡ Alliance Records & Culture Sound\n[00:12.00] 💬 ${m.description || "Keyifli Dinlemeler!"}`,
+      audioUrl: audioSrc,
+      customAudioUrl: audioSrc,
+      isMix: true
+    };
+
+    return mixTrack;
   }
 };

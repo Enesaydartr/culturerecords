@@ -142,8 +142,13 @@ export class WebAudioEngine {
       : this.durationSec;
   }
 
-  private _resolveAudioPath(trackId: string): string {
-    return `/assets/audio/${trackId}.mp4`;
+  private _resolveAudioPath(trackOrId: Track | string): string {
+    if (typeof trackOrId === "object" && trackOrId !== null) {
+      if (trackOrId.customAudioUrl) return trackOrId.customAudioUrl;
+      if (trackOrId.audioUrl) return trackOrId.audioUrl;
+      return `/assets/audio/${trackOrId.id}.mp4`;
+    }
+    return `/assets/audio/${trackOrId}.mp4`;
   }
 
   public loadTrack(track: Track) {
@@ -151,7 +156,7 @@ export class WebAudioEngine {
     this.durationSec = track.durationSec || 180;
     this.currentTimeSec = 0;
     if (this.audioEl) {
-      const src = this._resolveAudioPath(track.id);
+      const src = this._resolveAudioPath(track);
       if (this.audioEl.src !== src && !this.audioEl.src.endsWith(src)) {
         this.audioEl.src = src;
         this.audioEl.load();
@@ -191,7 +196,7 @@ export class WebAudioEngine {
     this.durationSec = targetTrack.durationSec || 180;
 
     if (this.audioEl) {
-      const src = this._resolveAudioPath(targetTrack.id);
+      const src = this._resolveAudioPath(targetTrack);
       const isSameSrc = this.audioEl.src.endsWith(src) || this.audioEl.src === src;
       if (!isSameSrc) {
         this.audioEl.src = src;

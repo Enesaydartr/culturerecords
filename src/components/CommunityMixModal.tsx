@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { AuthService } from "@/services/authService";
 import { PLAYLIST } from "@/data/artists";
 import { MixService, CommunityMix } from "@/services/mixService";
+import { AudioStorageService } from "@/services/audioStorageService";
 import { Button } from "@/components/ui/button";
 import { X, Sparkles, Music, Upload, Check, AlertCircle, Disc3, FileAudio } from "lucide-react";
 
@@ -30,6 +31,7 @@ export default function CommunityMixModal({ isOpen, onClose, onMixCreated }: Com
   const [coverImage, setCoverImage] = useState(MIX_COVER_PRESETS[0]);
   const [selectedTracks, setSelectedTracks] = useState<string[]>(["bak_ne_dicem"]);
   const [customAudioUrl, setCustomAudioUrl] = useState("");
+  const [audioFile, setAudioFile] = useState<File | null>(null);
   const [audioFileName, setAudioFileName] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -53,6 +55,7 @@ export default function CommunityMixModal({ isOpen, onClose, onMixCreated }: Com
   const handleAudioUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      setAudioFile(file);
       setAudioFileName(file.name);
       const audioBlobUrl = URL.createObjectURL(file);
       setCustomAudioUrl(audioBlobUrl);
@@ -111,6 +114,9 @@ export default function CommunityMixModal({ isOpen, onClose, onMixCreated }: Com
     });
 
     if (res.success && res.mix) {
+      if (audioFile) {
+        AudioStorageService.saveMixAudio(res.mix.id, audioFile);
+      }
       if (onMixCreated) onMixCreated(res.mix);
       onClose();
       alert("Mixiniz başarıyla paylaşıldı ve topluluk vitrinine eklendi!");

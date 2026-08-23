@@ -246,9 +246,9 @@ export default function UserProfileModal({
                   {m.audioUrl && (
                     <button
                       type="button"
-                      onClick={() => {
-                        const tr = PLAYLIST.find((t) => m.usedTrackIds.includes(t.id)) || PLAYLIST[0];
-                        if (onTrackPlay) onTrackPlay(tr);
+                      onClick={async () => {
+                        const mixTrack = await MixService.getPlayableTrackForMix(m);
+                        if (onTrackPlay) onTrackPlay(mixTrack);
                       }}
                       className="p-1.5 bg-white/10 hover:bg-red-600 text-white transition-all shrink-0"
                       title="Miksi Çal"

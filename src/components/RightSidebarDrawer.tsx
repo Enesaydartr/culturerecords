@@ -451,12 +451,10 @@ export default function RightSidebarDrawer({
                         <img src={m.coverImage} alt={m.title} className="h-full w-full object-cover" />
                         <button
                           type="button"
-                          onClick={() => {
+                          onClick={async () => {
                             MixService.incrementMixListen(m.id);
-                            if (m.usedTrackIds.length > 0) {
-                              const tr = PLAYLIST.find((t) => t.id === m.usedTrackIds[0]);
-                              if (tr && onTrackPlay) onTrackPlay(tr);
-                            }
+                            const mixTrack = await MixService.getPlayableTrackForMix(m);
+                            if (onTrackPlay) onTrackPlay(mixTrack);
                           }}
                           className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity text-white"
                         >
