@@ -8,6 +8,7 @@ export interface TrackTrimData {
   endSec: number;
 }
 
+// EXACT 100% Match of the User's Localhost Synced Lyrics Database (33 Songs)
 export const BUILTIN_SYNCED_LYRICS: Record<string, SyncedLineData[]> = {
   "geldigim_yer": [
     {
@@ -145,195 +146,195 @@ export const BUILTIN_SYNCED_LYRICS: Record<string, SyncedLineData[]> = {
   ],
   "olm_was_rap_mep": [
     {
-      "time": 0.8,
+      "time": 20.86,
       "text": "Oğlum, was rap mep? Mahallede yaşıyo'm"
     },
     {
-      "time": 3.02,
+      "time": 23.08,
       "text": "Ayakkabı Nike ama ayakkabı sikiyo'"
     },
     {
-      "time": 5.22,
+      "time": 25.28,
       "text": "Çekil ben'le video, ben de beni çekiyo'm"
     },
     {
-      "time": 7.42,
+      "time": 27.48,
       "text": "Kızlar beni \"Yes\"ler, ben de kızları ısırıyo'm"
     },
     {
-      "time": 9.61,
+      "time": 29.67,
       "text": "(Hah, hah, hah) Schöne manzara"
     },
     {
-      "time": 12.05,
+      "time": 32.11,
       "text": "Artık para cepte, oldu bana mandala"
     },
     {
-      "time": 13.88,
+      "time": 33.94,
       "text": "O-Olympique Marseil', silahla kombin, ASICS"
     },
     {
-      "time": 16.52,
+      "time": 36.58,
       "text": "Her şarkı üç günde bir milyon, basit"
     },
     {
-      "time": 18.6,
+      "time": 38.66,
       "text": "Yediniz, bitiremediniz, ERAY, Mansur"
     },
     {
-      "time": 20.77,
+      "time": 40.83,
       "text": "Bu nası' bi' proje, oğlum? ERAY, Mansur"
     },
     {
-      "time": 22.86,
+      "time": 42.92,
       "text": "Bunları dinleyen var mı? ERAY, Mansur"
     },
     {
-      "time": 25.45,
+      "time": 45.51,
       "text": "Götünüze girsin ERAY, Mansur"
     },
     {
-      "time": 27.8,
+      "time": 47.86,
       "text": "(Enes, bunu bip'leme, moruk, duysunlar)"
     },
     {
-      "time": 29.9,
+      "time": 49.96,
       "text": "Tüm şehirde havada uçuyo' kurşunlar"
     },
     {
-      "time": 32.27,
+      "time": 52.33,
       "text": "Ich bin jung, ich bin wild, ich bin asosyal"
     },
     {
-      "time": 34.14,
+      "time": 54.2,
       "text": "GOP City, real life, doğuştan anormal"
     },
     {
-      "time": 37.42,
+      "time": 57.48,
       "text": "Doğuştan anormal"
     },
     {
-      "time": 39.03,
+      "time": 59.09,
       "text": "Doğum yeri 607, sanırım ondan"
     },
     {
-      "time": 41.69,
+      "time": 61.75,
       "text": "So-so-soğuk sevmem ondan"
     },
     {
-      "time": 43.15,
+      "time": 63.21,
       "text": "Hemеn al'ca'm intikam, doğuştan anormal (E-E—)"
     },
     {
-      "time": 45.4,
+      "time": 65.46,
       "text": "ERAY, Mansur, Ouzo da misafir (He)"
     },
     {
-      "time": 47.69,
+      "time": 67.75,
       "text": "Laf edenlеr gelemiyo' vis-à-vis (He)"
     },
     {
-      "time": 50.89,
+      "time": 70.95,
       "text": "Enes, helal, bu beat'te ben kâfi (Okay)"
     },
     {
-      "time": 52.28,
+      "time": 72.34,
       "text": "Kiralık araç, rengi safir (Let's go)"
     },
     {
-      "time": 54.19,
+      "time": 74.25,
       "text": "4-4, 3-3, 0-6-7"
     },
     {
-      "time": 56.03,
+      "time": 76.09,
       "text": "İn Opel Astra, bin Audi sieben (Bin Audi)"
     },
     {
-      "time": 59.16,
+      "time": 79.22,
       "text": "Her sözüm fiilen"
     },
     {
-      "time": 61.01,
+      "time": 81.07,
       "text": "Her yerim bilezik, Saudi feelin' (Yallah)"
     },
     {
-      "time": 63.51,
+      "time": 83.57,
       "text": "Ah, sim simma"
     },
     {
-      "time": 64.77,
+      "time": 84.83,
       "text": "Häng ab mit Mansur, sem'hemme yimma (Sem'hemme yimma)"
     },
     {
-      "time": 67.89,
+      "time": 87.95,
       "text": "He, bin Euro"
     },
     {
-      "time": 69.46,
+      "time": 89.52,
       "text": "Sence para mı, lan, elli bin lira? (Elli bin lira)"
     },
     {
-      "time": 71.6,
+      "time": 91.66,
       "text": "Be-benim araç kiralık, sizin ruhunuz (He)"
     },
     {
-      "time": 73.61,
+      "time": 93.67,
       "text": "Eğrisiniz, bu yüzden siki tuttunuz (He)"
     },
     {
-      "time": 75.78,
+      "time": 95.84,
       "text": "Hızlı parlayan hızlı unutulur"
     },
     {
-      "time": 78.05,
+      "time": 98.11,
       "text": "Konuşurlar ama konular kuruntudur (Şş)"
     },
     {
-      "time": 81.11,
+      "time": 101.17,
       "text": "Doğuştan anormal"
     },
     {
-      "time": 82.15,
+      "time": 102.21,
       "text": "Doğum yeri 607, sanırım ondan"
     },
     {
-      "time": 85.4,
+      "time": 105.46,
       "text": "So-so-soğuk sevmem ondan"
     },
     {
-      "time": 86.66,
+      "time": 106.72,
       "text": "Hemen al'ca'm intikam, doğuştan anormal"
     },
     {
-      "time": 89.74,
+      "time": 109.8,
       "text": "Doğuştan anormal"
     },
     {
-      "time": 90.92,
+      "time": 110.98,
       "text": "Doğum yeri 607, sanırım ondan"
     },
     {
-      "time": 93.5,
+      "time": 113.56,
       "text": "So-so-soğuk sevmem ondan"
     },
     {
-      "time": 95.45,
+      "time": 115.51,
       "text": "Hemen al'ca'm intikam, doğuştan anormal"
     },
     {
-      "time": 97.9,
+      "time": 117.96,
       "text": "ERAY, Mansur, Ouzo da misafir (He)"
     },
     {
-      "time": 100.51,
+      "time": 120.57,
       "text": "Ou-Ouzo da misafir"
     },
     {
-      "time": 102.33,
+      "time": 122.39,
       "text": "ERAY, Mansur, Ouzo da— (yaparsovunu—)"
     },
     {
-      "time": 104.84,
+      "time": 124.9,
       "text": "(ya-ya-yaparsovunuenes)"
     }
   ],
@@ -557,413 +558,413 @@ export const BUILTIN_SYNCED_LYRICS: Record<string, SyncedLineData[]> = {
   ],
   "bak_ne_dicem": [
     {
-      "time": 0.5,
+      "time": 22.93,
       "text": "(yap-yap-yaparsovunuenes)"
     },
     {
-      "time": 5.04,
+      "time": 27.47,
       "text": "Bak, ne diy'ce'm, aklıma geldi, biz bu yolu yürümüştük, yürümüştük, oh"
     },
     {
-      "time": 10.28,
+      "time": 32.71,
       "text": "Hatta yürürken ceketimi sana verip üşümüştüm, üşümüştüm, oh"
     },
     {
-      "time": 15.06,
+      "time": 37.49,
       "text": "Gittiğinden beri soruyo' tüm mahalle hâlimi"
     },
     {
-      "time": 17.81,
+      "time": 40.24,
       "text": "Sen de merak edersen bi' mesaj at bahaneli"
     },
     {
-      "time": 20.41,
+      "time": 42.84,
       "text": "Katiller yoklarmış zaten olay mahallini, mahallini, oh"
     },
     {
-      "time": 25.27,
+      "time": 47.7,
       "text": "Kaşıdıkça kanadı, bi' kabuk tutamadık"
     },
     {
-      "time": 27.94,
+      "time": 50.37,
       "text": "Gözden uzak olan gönülden ırakmış, anladım"
     },
     {
-      "time": 30.41,
+      "time": 52.84,
       "text": "Sakındım hep yaramı, yanlışım bu sanırım"
     },
     {
-      "time": 32.91,
+      "time": 55.34,
       "text": "İsterdim sen beni ara, ben hep seni aradım"
     },
     {
-      "time": 35.1,
+      "time": 57.53,
       "text": "Beni Mecnun sanmayın unuturum yaz ayı"
     },
     {
-      "time": 37.61,
+      "time": 60.04,
       "text": "Leyla olsaydın bitirmezdim kavgayı"
     },
     {
-      "time": 40.03,
+      "time": 62.46,
       "text": "Gözümü oysun diye besledim kargayı (Besledim kargayı)"
     },
     {
-      "time": 43.61,
+      "time": 66.04,
       "text": "(kargayı) (kargayı)"
     },
     {
-      "time": 45.28,
+      "time": 67.71,
       "text": "Seni taşıyorum kalbimde beni sev diye"
     },
     {
-      "time": 47.34,
+      "time": 69.77,
       "text": "İhtiyaç duyuyorum sen tarafından sevgiye"
     },
     {
-      "time": 49.9,
+      "time": 72.33,
       "text": "İki gözüm, gözlerim değil, yaşlarım hediye"
     },
     {
-      "time": 52.59,
+      "time": 75.02,
       "text": "Sana değer, bu kalp sana değer"
     },
     {
-      "time": 55.17,
+      "time": 77.6,
       "text": "Seni taşıyorum kalbimde beni sev diye"
     },
     {
-      "time": 57.66,
+      "time": 80.09,
       "text": "İhtiyaç duyuyorum sen tarafından sevgiye"
     },
     {
-      "time": 60.03,
+      "time": 82.46,
       "text": "İki gözüm, gözlerim değil, yaşlarım hediye"
     },
     {
-      "time": 62.74,
+      "time": 85.17,
       "text": "Sana değer, bu kalp sana değer"
     },
     {
-      "time": 65.86,
+      "time": 88.29,
       "text": "He-her şey akıp gider zaman gibi, anla"
     },
     {
-      "time": 68.28,
+      "time": 90.71,
       "text": "Ne de olsa yaşıyo'sun, kızım, İstanbul'da"
     },
     {
-      "time": 70.9,
+      "time": 93.33,
       "text": "Bu devirde bugün var, yarın yok, anla"
     },
     {
-      "time": 73.39,
+      "time": 95.82,
       "text": "Hâlâ vaktimiz varken sarıl bana bir anda"
     },
     {
-      "time": 75.8,
+      "time": 98.23,
       "text": "Bir anda bi' güne başlamışsın biriyle"
     },
     {
-      "time": 78.11,
+      "time": 100.54,
       "text": "Ben sevemem yeniden senden başkasını"
     },
     {
-      "time": 80.86,
+      "time": 103.29,
       "text": "Bana \"Kalıyo'\" de, neden bu acılar, nereden?"
     },
     {
-      "time": 83.27,
+      "time": 105.7,
       "text": "Sana kırk sular taşımıştım kırk bir tane dereden"
     },
     {
-      "time": 85.89,
+      "time": 108.32,
       "text": "Sana değer döktüğüm bütün gözyaşlarım, uyku ilaçlarım"
     },
     {
-      "time": 90.92,
+      "time": 113.35,
       "text": "\"Sana neler oldu?\" diyo' bütün dostlarım, arkadaşlarım"
     },
     {
-      "time": 98.22,
+      "time": 120.65,
       "text": "Seni taşıyorum kalbimde beni sev diye"
     },
     {
-      "time": 100.86,
+      "time": 123.29,
       "text": "İhtiyaç duyuyorum sen tarafından sevgiye"
     },
     {
-      "time": 103.12,
+      "time": 125.55,
       "text": "İki gözüm, gözlerim değil, yaşlarım hediye"
     },
     {
-      "time": 105.93,
+      "time": 128.36,
       "text": "Sana değer, bu kalp sana değer"
     },
     {
-      "time": 108.22,
+      "time": 130.65,
       "text": "Seni taşıyorum kalbimde beni sev diye"
     },
     {
-      "time": 110.77,
+      "time": 133.2,
       "text": "İhtiyaç duyuyorum sen tarafından sevgiye"
     },
     {
-      "time": 112.92,
+      "time": 135.35,
       "text": "İki gözüm, gözlerim değil, yaşlarım hediye"
     },
     {
-      "time": 117.28,
+      "time": 139.71,
       "text": "Sana değer, bu kalp sana değer"
     }
   ],
   "aktiv2": [
     {
-      "time": 4.1,
+      "time": 22.41,
       "text": "(Petric)"
     },
     {
-      "time": 5.56,
+      "time": 23.87,
       "text": "Türkiye'nin üç tarafı deniz, bizim semtin dört tarafı beton kaplıydı"
     },
     {
-      "time": 9.24,
+      "time": 27.55,
       "text": "Esmer iyi kızdı ama sarı da tatlıydı"
     },
     {
-      "time": 11.74,
+      "time": 30.05,
       "text": "Onlarda var, bende yok, söyle bana, hak mıydı?"
     },
     {
-      "time": 14.28,
+      "time": 32.59,
       "text": "Hocam dedi \"Senden hayır gelmez\", adam haklıydı"
     },
     {
-      "time": 16.78,
+      "time": 35.09,
       "text": "Kır, yuvarla, döndür, serseriler güldü"
     },
     {
-      "time": 19.04,
+      "time": 37.35,
       "text": "Serseriler güldü çünkü hepsi çok kez gördü"
     },
     {
-      "time": 21.92,
+      "time": 40.23,
       "text": "Hayat tecrübedir, e, biz de tecrübeli"
     },
     {
-      "time": 24.49,
+      "time": 42.8,
       "text": "Unut içindekini, sigara gibi öldür"
     },
     {
-      "time": 26.84,
+      "time": 45.15,
       "text": "Vazgeçmekse hayır aileme dair"
     },
     {
-      "time": 29.37,
+      "time": 47.68,
       "text": "Mevzu ekmek davasıysa âlemine abiyim"
     },
     {
-      "time": 32.05,
+      "time": 50.36,
       "text": "Anlattılar hikâye ve kolpadalar safi"
     },
     {
-      "time": 34.49,
+      "time": 52.8,
       "text": "Bi' gün tatil olucak hayat ama daha değil"
     },
     {
-      "time": 36.46,
+      "time": 54.77,
       "text": "Hеr Mercedes gördüğümdе hep derdim \"Bu piçin teki\""
     },
     {
-      "time": 39.21,
+      "time": 57.52,
       "text": "Oldum bugün Mercedes'in içindeki"
     },
     {
-      "time": 41.77,
+      "time": 60.08,
       "text": "Hayatım boyunca hiç sevmemiştim etiketi"
     },
     {
-      "time": 44.33,
+      "time": 62.64,
       "text": "Çünkü kardeşlerim hep gerçekten tetikteydi (Chikocan, 24)"
     },
     {
-      "time": 46.8,
+      "time": 65.11,
       "text": "Basarım tetiklere, senin gibi konuşmam"
     },
     {
-      "time": 48.92,
+      "time": 67.23,
       "text": "Sen gösterme hiç icraat, hep karı gibi konuş, lan (Hehehe)"
     },
     {
-      "time": 51.6,
+      "time": 69.91,
       "text": "Bebek'te date yok, var adliyede duruşmam"
     },
     {
-      "time": 53.73,
+      "time": 72.04,
       "text": "Bundan yazan influencer karılarla buluşmam"
     },
     {
-      "time": 56.3,
+      "time": 74.61,
       "text": "Tıraşlar hep siker, baba, kıyafetler mazın"
     },
     {
-      "time": 58.82,
+      "time": 77.13,
       "text": "Ama TV'lerde yüz kapalı çekiyo' bu basın (Şş, şş)"
     },
     {
-      "time": 61.4,
+      "time": 79.71,
       "text": "Ararsam ben bulurum ve bulursam da vururum"
     },
     {
-      "time": 64.18,
+      "time": 82.49,
       "text": "Sokaklarda kurtarmıyo' kilo ya da kasın"
     },
     {
-      "time": 66.61,
+      "time": 84.92,
       "text": "Hızır yoldaşımız, asaletim Ali'den"
     },
     {
-      "time": 69.16,
+      "time": 87.47,
       "text": "Bize \"Ayan\" derler ama sen yalancı beysin"
     },
     {
-      "time": 71.76,
+      "time": 90.07,
       "text": "Mesajlarda erkektin ya, bulduğumda geysin"
     },
     {
-      "time": 73.85,
+      "time": 92.16,
       "text": "Az'cık adam ol, birayê min, seni vurduğuma değsin (Hehehe)"
     },
     {
-      "time": 76.71,
+      "time": 95.02,
       "text": "Okmeydanı City, sokakta çalıştım çok işte"
     },
     {
-      "time": 79.26,
+      "time": 97.57,
       "text": "Senin gibi takılmadım o club'ta o beach'te"
     },
     {
-      "time": 81.65,
+      "time": 99.96,
       "text": "Çocukken de dızdım, o zaman da tersoydum"
     },
     {
-      "time": 84.65,
+      "time": 102.96,
       "text": "Komşularım derdi \"Sakın oynamayın o piçle\""
     },
     {
-      "time": 86.97,
+      "time": 105.28,
       "text": "Ben gaza basıyo'm, senin aklın frenlerde"
     },
     {
-      "time": 89.07,
+      "time": 107.38,
       "text": "Aslan gibi savaşıyo'z üç senedir biraderle"
     },
     {
-      "time": 91.75,
+      "time": 110.06,
       "text": "Açtık arayı kederle, yarıştayız kahpelerle"
     },
     {
-      "time": 94.76,
+      "time": 113.07,
       "text": "Sen ne dersen de baba zirvelerde"
     },
     {
-      "time": 96.92,
+      "time": 115.23,
       "text": "Wo bist du? Arkadaşlar, polis bu"
     },
     {
-      "time": 98.89,
+      "time": 117.2,
       "text": "Kaçar sanki Tolisso, yönetemez çete Mourinho"
     },
     {
-      "time": 101.32,
+      "time": 119.63,
       "text": "Tu-tu-tuttum bi' otel, getto fenomen, je m'appelle"
     },
     {
-      "time": 103.93,
+      "time": 122.24,
       "text": "Mansur ve de Kanak götünden alır o donunu"
     },
     {
-      "time": 106.69,
+      "time": 125,
       "text": "Ha-ha-hamdullah for everything, favela'mda bitmez umut"
     },
     {
-      "time": 109.62,
+      "time": 127.93,
       "text": "Kırk fırın ekmek ye, gözünde yaşları kurut"
     },
     {
-      "time": 112.2,
+      "time": 130.51,
       "text": "Daha uzun olsa bile bur'da ötmez borun"
     },
     {
-      "time": 114.75,
+      "time": 133.06,
       "text": "Tişörtle geziyo'm, sen çelik yeleğinle korun"
     },
     {
-      "time": 117.62,
+      "time": 135.93,
       "text": "Mansur abi harbi straat internasyonel"
     },
     {
-      "time": 119.78,
+      "time": 138.09,
       "text": "Uyan, trafik, telefonuna para rasyonel"
     },
     {
-      "time": 122.14,
+      "time": 140.45,
       "text": "Takımlarım or'jinal, tabancalar da or'jinal (Pow)"
     },
     {
-      "time": 124.55,
+      "time": 142.86,
       "text": "Mein Brudi ist Macher, oyun kurucu personel"
     },
     {
-      "time": 127.38,
+      "time": 145.69,
       "text": "Bratte, Mamak stil, adım \"Reder\", kalite"
     },
     {
-      "time": 129.82,
+      "time": 148.13,
       "text": "Sesi kesip sakin olun, gerek yok hiç panike"
     },
     {
-      "time": 132.29,
+      "time": 150.6,
       "text": "Redo K dahil oyuna, kim kimin payına"
     },
     {
-      "time": 134.87,
+      "time": 153.18,
       "text": "Senin gibi adamın ta koyayım ****"
     },
     {
-      "time": 137.69,
+      "time": 156,
       "text": "CLTR ekip takım, Ankaralı David Beckham"
     },
     {
-      "time": 139.75,
+      "time": 158.06,
       "text": "En yakın rakibim zaten gerimde kaldı on adım, ah"
     },
     {
-      "time": 142.59,
+      "time": 160.9,
       "text": "Rakkas, dar alanda makas"
     },
     {
-      "time": 144.48,
+      "time": 162.79,
       "text": "Oğlum, senin işin gücün çekmek göte paspas (Çek, çek, çek)"
     },
     {
-      "time": 147.66,
+      "time": 165.97,
       "text": "Çek sabır, karardı bu kehribar"
     },
     {
-      "time": 149.51,
+      "time": 167.82,
       "text": "Devir bizim devir, sen de rap'i bırak, ihtiyar"
     },
     {
-      "time": 152.09,
+      "time": 170.4,
       "text": "Arsa alıp sat ya da gece sonu barbuta"
     },
     {
-      "time": 154.62,
+      "time": 172.93,
       "text": "Bizimkiler ayı ve sen benziyo'sun armuta, hahaha"
     },
     {
-      "time": 160.3,
+      "time": 178.61,
       "text": "(Soylu)"
     }
   ],
@@ -1371,7 +1372,7 @@ export const BUILTIN_SYNCED_LYRICS: Record<string, SyncedLineData[]> = {
       "text": "Pa-pa-pa-pa-pa, pa-pap"
     },
     {
-      "time": 121.0,
+      "time": 121,
       "text": "Yamaha T-Max, Honda Grün, Kawasaki"
     },
     {
@@ -1691,7 +1692,7 @@ export const BUILTIN_SYNCED_LYRICS: Record<string, SyncedLineData[]> = {
       "text": "(Paf, paf, vuruyo' familya)"
     },
     {
-      "time": 109.0,
+      "time": 109,
       "text": "Burada her gün pat, pat vuruyo' familya"
     },
     {
@@ -1725,195 +1726,195 @@ export const BUILTIN_SYNCED_LYRICS: Record<string, SyncedLineData[]> = {
   ],
   "gucum_yok": [
     {
-      "time": 0.4,
+      "time": 21.58,
       "text": "Uh-ah"
     },
     {
-      "time": 1.99,
+      "time": 23.17,
       "text": "(Ta-Ta-Tanerman)"
     },
     {
-      "time": 3.15,
+      "time": 24.33,
       "text": "Ah"
     },
     {
-      "time": 4.51,
+      "time": 25.69,
       "text": "Nasıl geldim, söyle, bugüne dek"
     },
     {
-      "time": 6.51,
+      "time": 27.69,
       "text": "Acıyı yanımda gezdirerek?"
     },
     {
-      "time": 8.23,
+      "time": 29.41,
       "text": "Sanki onun bi' parçası gibi acım"
     },
     {
-      "time": 10.41,
+      "time": 31.59,
       "text": "Nereye gitse yokmuş ilacı"
     },
     {
-      "time": 12.75,
+      "time": 33.93,
       "text": "İlacı bulursun, arayan bulurmuş"
     },
     {
-      "time": 14.44,
+      "time": 35.62,
       "text": "Ben bulamayıp küstüm kendime"
     },
     {
-      "time": 16.54,
+      "time": 37.72,
       "text": "Yürüdüm çok yollar, çaldım çok kapılar"
     },
     {
-      "time": 18.21,
+      "time": 39.39,
       "text": "Hancı yok bu handa, vay hâlime"
     },
     {
-      "time": 20.71,
+      "time": 41.89,
       "text": "Söyle, şimdi mutlu musun?"
     },
     {
-      "time": 22.97,
+      "time": 44.15,
       "text": "Huzurlu uykular var mı?"
     },
     {
-      "time": 24.77,
+      "time": 45.95,
       "text": "Benim hâlâ kâbusumsun"
     },
     {
-      "time": 26.85,
+      "time": 48.03,
       "text": "Bu sensiz beşinci yazdı"
     },
     {
-      "time": 29.45,
+      "time": 50.63,
       "text": "Bu şarkıyı sana yazdım"
     },
     {
-      "time": 31.3,
+      "time": 52.48,
       "text": "Sen unuturken adımı"
     },
     {
-      "time": 33.74,
+      "time": 54.92,
       "text": "Rüyalarımda sayıkladım"
     },
     {
-      "time": 35.83,
+      "time": 57.01,
       "text": "Beni tanıdın mı?"
     },
     {
-      "time": 37.2,
+      "time": 58.38,
       "text": "Seninle baş edecek gücüm yok"
     },
     {
-      "time": 40.35,
+      "time": 61.53,
       "text": "Bu aşk yorar ikimizi"
     },
     {
-      "time": 41.99,
+      "time": 63.17,
       "text": "Seni taşıyacak bi' kalbim yok"
     },
     {
-      "time": 44.08,
+      "time": 65.26,
       "text": "Kalbim sorar ikimizi"
     },
     {
-      "time": 45.86,
+      "time": 67.04,
       "text": "İkimizi, unutmak istedim ikimizi"
     },
     {
-      "time": 49.53,
+      "time": 70.71,
       "text": "İkimizi, nasıl unuturum ikimizi?"
     },
     {
-      "time": 53.31,
+      "time": 74.49,
       "text": "(Na-na) Nasıl hatırlamam ikimizi?"
     },
     {
-      "time": 55.53,
+      "time": 76.71,
       "text": "Bi' fırtına tuttu bizi, batırmasa da gemimizi"
     },
     {
-      "time": 58.51,
+      "time": 79.69,
       "text": "Nasıl hatırlamam evimizi?"
     },
     {
-      "time": 60.52,
+      "time": 81.7,
       "text": "Senin güzel yüzün yüzünden yüzümde yüz tane yara izi"
     },
     {
-      "time": 63.81,
+      "time": 84.99,
       "text": "Aynalar anlatır bana bizi, sanki dizi"
     },
     {
-      "time": 66.23,
+      "time": 87.41,
       "text": "Yak, ver ateşi, çeker, dert dumanı sisi (Woah)"
     },
     {
-      "time": 69.66,
+      "time": 90.84,
       "text": "Bende hasım denizde yosun"
     },
     {
-      "time": 71.4,
+      "time": 92.58,
       "text": "Yansa da cigara ben hâlâ buzum"
     },
     {
-      "time": 73.22,
+      "time": 94.4,
       "text": "Huyum kurusun, çocuk uyusun"
     },
     {
-      "time": 75.19,
+      "time": 96.37,
       "text": "Allah'ım korusun var ise lüzum"
     },
     {
-      "time": 77.18,
+      "time": 98.36,
       "text": "Yüzüme kusarım hep illa bi' kusur"
     },
     {
-      "time": 79.17,
+      "time": 100.35,
       "text": "Ararken yirmi bir gramlık huzur"
     },
     {
-      "time": 81.39,
+      "time": 102.57,
       "text": "Bi' sana küsüm ben, bi' sana pozum"
     },
     {
-      "time": 83.16,
+      "time": 104.34,
       "text": "Hayat kısa, namlum uzun, kuzum (Ah-ah)"
     },
     {
-      "time": 86.81,
+      "time": 107.99,
       "text": "Çünkü seninle—"
     },
     {
-      "time": 87.55,
+      "time": 108.73,
       "text": "Baş edecek gücüm yok"
     },
     {
-      "time": 89.45,
+      "time": 110.63,
       "text": "Bu aşk yorar ikimizi"
     },
     {
-      "time": 91.05,
+      "time": 112.23,
       "text": "Seni taşıyacak bi' kalbim yok"
     },
     {
-      "time": 93.41,
+      "time": 114.59,
       "text": "Kalbim sorar ikimizi"
     },
     {
-      "time": 94.75,
+      "time": 115.93,
       "text": "İkimizi, unutmak istedim ikimizi"
     },
     {
-      "time": 97.06,
+      "time": 118.24,
       "text": "İkimizi, nasıl unuturum ikimizi?"
     },
     {
-      "time": 102.9,
+      "time": 124.08,
       "text": "İkimizi, unutmak istedim ikimizi"
     },
     {
-      "time": 106.78,
+      "time": 127.96,
       "text": "İkimizi, nasıl unuturum ikimizi? (Ya)"
     }
   ],
@@ -2281,7 +2282,7 @@ export const BUILTIN_SYNCED_LYRICS: Record<string, SyncedLineData[]> = {
       "text": "Yağmurlar altında"
     },
     {
-      "time": 96.0,
+      "time": 96,
       "text": "Bun'la baş edemem"
     },
     {
@@ -2521,7 +2522,7 @@ export const BUILTIN_SYNCED_LYRICS: Record<string, SyncedLineData[]> = {
       "text": "İstersen seve seve verirsin hakkımı"
     },
     {
-      "time": 36.0,
+      "time": 36,
       "text": "Ya da s**** alırım lan aklını"
     },
     {
@@ -2621,7 +2622,7 @@ export const BUILTIN_SYNCED_LYRICS: Record<string, SyncedLineData[]> = {
       "text": "Yaratıyo'm ciro, topluyorum tane tane"
     },
     {
-      "time": 95.0,
+      "time": 95,
       "text": "Ne yaptıysam kurtulamadım, peşimde lanet"
     },
     {
@@ -2961,7 +2962,7 @@ export const BUILTIN_SYNCED_LYRICS: Record<string, SyncedLineData[]> = {
       "text": "Koşturdum, daha ne? Paket oldu hayaller"
     },
     {
-      "time": 50.0,
+      "time": 50,
       "text": "(Hayat) Hayat illegale"
     },
     {
@@ -3055,323 +3056,323 @@ export const BUILTIN_SYNCED_LYRICS: Record<string, SyncedLineData[]> = {
   ],
   "hmdl": [
     {
-      "time": 0.5,
+      "time": 20.62,
       "text": "(Mehsah à la prod)"
     },
     {
-      "time": 1.36,
+      "time": 21.48,
       "text": "Neu—"
     },
     {
-      "time": 2.51,
+      "time": 22.63,
       "text": "Neuf, geh auf Profil, sacri—"
     },
     {
-      "time": 4.2,
+      "time": 24.32,
       "text": "Trance in mei'm Block von Marihu—"
     },
     {
-      "time": 7.65,
+      "time": 27.77,
       "text": "GT, mach' heut Geld mit—"
     },
     {
-      "time": 8.82,
+      "time": 28.94,
       "text": "Für uns, Cho, nie wie—"
     },
     {
-      "time": 10.62,
+      "time": 30.74,
       "text": "Cho, zéro-neuf, geh auf Profil, sacrifice"
     },
     {
-      "time": 12.98,
+      "time": 33.1,
       "text": "Zieh' ein'n Zug in Trance in mei'm Block vom Marihu'"
     },
     {
-      "time": 15.54,
+      "time": 35.66,
       "text": "Choya, im Parkhaus, fahr' GT, mach' heut Geld mit Artifice"
     },
     {
-      "time": 18.05,
+      "time": 38.17,
       "text": "Das heißt für uns, Cho, nie wieder Habis"
     },
     {
-      "time": 20.51,
+      "time": 40.63,
       "text": "Schweißgebadet wegen Stress, zulu op Audi, Bro, herres"
     },
     {
-      "time": 23.4,
+      "time": 43.52,
       "text": "Wenn du fragst, wieso, Choya, ich nicht arbeite für ein'n Chef"
     },
     {
-      "time": 25.81,
+      "time": 45.93,
       "text": "Komm' vom Block, sag, was ich seh'"
     },
     {
-      "time": 27.99,
+      "time": 48.11,
       "text": "Fick Gericht, ich knie' vor Gott, nur Plädoyer, eh"
     },
     {
-      "time": 31.01,
+      "time": 51.13,
       "text": "Bin mit Bande, Zéro-neuf-Ekip, sind nicht wie andren"
     },
     {
-      "time": 33.97,
+      "time": 54.09,
       "text": "Police-Kontrolle, Choya, im Audi Performante"
     },
     {
-      "time": 36.48,
+      "time": 56.6,
       "text": "Lenk', weil Iba3ash ist hinter uns"
     },
     {
-      "time": 38.31,
+      "time": 58.43,
       "text": "Fick die AfD, weil die Lage kocht zum Siedepunkt, eh"
     },
     {
-      "time": 41.85,
+      "time": 61.97,
       "text": "Ich liefer' Qualität aus Ghetto, bin am Boden, Choya, immer noch"
     },
     {
-      "time": 44.2,
+      "time": 64.32,
       "text": "Mach's für Hip-Hop, Chaye, nicht für Klicks"
     },
     {
-      "time": 47.12,
+      "time": 67.24,
       "text": "Bau' mir alles selber auf, geb' den Jüngeren Respekt"
     },
     {
-      "time": 49.44,
+      "time": 69.56,
       "text": "Fick' Geld, fick' auf Hype, Cho, du weißt, wofür ich steh'"
     },
     {
-      "time": 52.1,
+      "time": 72.22,
       "text": "Emanet in pantolon, beat'ler Mehsah à la prod"
     },
     {
-      "time": 54.71,
+      "time": 74.83,
       "text": "Pardon, kafa is reset, 0-6-7 (Ah)"
     },
     {
-      "time": 57.09,
+      "time": 77.21,
       "text": "Yaşıyorum, hamdullah, savaşıyorum, billah'"
     },
     {
-      "time": 59.64,
+      "time": 79.76,
       "text": "Tüm çabam senin için 607"
     },
     {
-      "time": 61.77,
+      "time": 81.89,
       "text": "CLTR ekip, Zéro-neuf, kardeşlere selam"
     },
     {
-      "time": 64.23,
+      "time": 84.35,
       "text": "Gerekirse suçlarını ört, c'est la vie, yaşa, gör (Ah)"
     },
     {
-      "time": 67.39,
+      "time": 87.51,
       "text": "İçindeyim ama bunu ben seçmedim"
     },
     {
-      "time": 69.54,
+      "time": 89.66,
       "text": "Duasıyla annenin bur'dan kurtul ya da öl"
     },
     {
-      "time": 72.24,
+      "time": 92.36,
       "text": "Karakterin satılık, söylesene, bedeli ne?"
     },
     {
-      "time": 74.62,
+      "time": 94.74,
       "text": "0-6-7 çocukken sarıldı kefenine"
     },
     {
-      "time": 77.27,
+      "time": 97.39,
       "text": "Koşarım ecelime, mesajım Azrail'ime"
     },
     {
-      "time": 79.89,
+      "time": 100.01,
       "text": "Ya sen beni bul ya da ben geliyorum yerine"
     },
     {
-      "time": 83.66,
+      "time": 103.78,
       "text": "Bugün ölsem n'olur? Kardeşler bakar aileme"
     },
     {
-      "time": 84.82,
+      "time": 104.94,
       "text": "Hapisteler, doğru, yeminim tüm mahalleme"
     },
     {
-      "time": 87.46,
+      "time": 107.58,
       "text": "(Sen) Sen, sen sevmesen de n'olur?"
     },
     {
-      "time": 89.97,
+      "time": 110.09,
       "text": "Listelerde adım, oğlum, çekilin yolumdan"
     },
     {
-      "time": 92.72,
+      "time": 112.84,
       "text": "Adımız dokuz da görmedik hiç sekiz"
     },
     {
-      "time": 95.1,
+      "time": 115.22,
       "text": "Yalnızlıkla baş başayız, biliyoruz, tekiz"
     },
     {
-      "time": 98.06,
+      "time": 118.18,
       "text": "Gökyüzü karanlık, benim kafa matiz"
     },
     {
-      "time": 99.97,
+      "time": 120.09,
       "text": "Benim kafa hapis, görüntüde netiz"
     },
     {
-      "time": 102.15,
+      "time": 122.27,
       "text": "(Açık) Açık tezgahlar, hızlı bereketler"
     },
     {
-      "time": 105.43,
+      "time": 125.55,
       "text": "Kuzenlerim dar alanda çok şık hareketler"
     },
     {
-      "time": 107.77,
+      "time": 127.89,
       "text": "Bütün sahte dostlarıma en koyudan renkler"
     },
     {
-      "time": 110.42,
+      "time": 130.54,
       "text": "Onlar beni bekler, ben onlara gitmem"
     },
     {
-      "time": 113.38,
+      "time": 133.5,
       "text": "Bütün dünya benim, senin cepte nothin'"
     },
     {
-      "time": 115.66,
+      "time": 135.78,
       "text": "Konuşuyo' karılarım, hepsi fanatik"
     },
     {
-      "time": 118.0,
+      "time": 138.12,
       "text": "Dostlarınız kıvrak ve çok atletik"
     },
     {
-      "time": 120.65,
+      "time": 140.77,
       "text": "At, avrat, silah, parmak, tetik"
     },
     {
-      "time": 122.94,
+      "time": 143.06,
       "text": "Tertemiz Prada, kirli eller bulaştı kana"
     },
     {
-      "time": 125.61,
+      "time": 145.73,
       "text": "Yarı zamanlı müzik, yarı zamanlı tijara"
     },
     {
-      "time": 128.15,
+      "time": 148.27,
       "text": "Yaktım sigara, AirPods'ta \"Luana\""
     },
     {
-      "time": 130.9,
+      "time": 151.02,
       "text": "Gittim konuma, hayır, gece gitmedim mekâna"
     },
     {
-      "time": 133.19,
+      "time": 153.31,
       "text": "34 plaka, RS7 dar sokakta (Mm-mm)"
     },
     {
-      "time": 135.67,
+      "time": 155.79,
       "text": "Onlardan biri olsam da bana ters bakarlar (Ah-ah)"
     },
     {
-      "time": 138.05,
+      "time": 158.17,
       "text": "Çocukken dahi pek dinleyememiştim masallar (Ah-ah)"
     },
     {
-      "time": 141.06,
+      "time": 161.18,
       "text": "Tel örgülerde takılı kaldı uçurtmalar (Ah)"
     },
     {
-      "time": 143.09,
+      "time": 163.21,
       "text": "Bi' bardak daha doldur dertlerime"
     },
     {
-      "time": 145.48,
+      "time": 165.6,
       "text": "Yıllar geçti, geldi her şey üzerime"
     },
     {
-      "time": 148.17,
+      "time": 168.29,
       "text": "Sen koymadın kendini ben yerine"
     },
     {
-      "time": 150.53,
+      "time": 170.65,
       "text": "Kaybettim büyüdüğüm sokaklarda kendimi ben"
     },
     {
-      "time": 153.19,
+      "time": 173.31,
       "text": "Bi' bardak daha doldur dertlerime"
     },
     {
-      "time": 155.56,
+      "time": 175.68,
       "text": "Yıllar geçti, geldi her şey üzerime"
     },
     {
-      "time": 158.33,
+      "time": 178.45,
       "text": "Sen koymadın kendini ben yerine"
     },
     {
-      "time": 160.57,
+      "time": 180.69,
       "text": "Kaybettim büyüdüğüm sokaklarda kendimi ben"
     },
     {
-      "time": 164.16,
+      "time": 184.28,
       "text": "Penceresiz kaldım, anne, duvarlar konuşmuyo'"
     },
     {
-      "time": 166.57,
+      "time": 186.69,
       "text": "Başımda iki polis, \"Her şeyi konuş\" diyo'"
     },
     {
-      "time": 169.03,
+      "time": 189.15,
       "text": "İşi ver, payı çöz, adam sat, yoldan dön"
     },
     {
-      "time": 171.86,
+      "time": 191.98,
       "text": "Maalesef de, memur abi, böyle adam olunmuyo'"
     },
     {
-      "time": 175.1,
+      "time": 195.22,
       "text": "Fark etmiyo' abi, kral, baba, dayı"
     },
     {
-      "time": 176.88,
+      "time": 197,
       "text": "Demiştim ya \"Etten, kemikten en kral kabadayı\""
     },
     {
-      "time": 180.11,
+      "time": 200.23,
       "text": "Evet, semtim Dereyolu, Okmeydanı"
     },
     {
-      "time": 181.95,
+      "time": 202.07,
       "text": "Hepsi geldi üstümüze ama biri yıkamadı"
     },
     {
-      "time": 184.78,
+      "time": 204.9,
       "text": "Hasım sahibiyiz, ondan mahkûm olduk semte"
     },
     {
-      "time": 186.58,
+      "time": 206.7,
       "text": "Benim cami dışında başımı göremezsin yerde"
     },
     {
-      "time": 189.58,
+      "time": 209.7,
       "text": "Değil kula, ettim sade Allah'ıma secde"
     },
     {
-      "time": 192.25,
+      "time": 212.37,
       "text": "Sonu ölüm olsa bile sakın boyun eğme"
     },
     {
-      "time": 194.39,
+      "time": 214.51,
       "text": "(B-B-BIGBAT)"
     },
     {
-      "time": 196.88,
+      "time": 217,
       "text": "(A-A-Alo Waxy)"
     }
   ],
@@ -4059,615 +4060,615 @@ export const BUILTIN_SYNCED_LYRICS: Record<string, SyncedLineData[]> = {
   ],
   "bilezik_pirlanta": [
     {
-      "time": 0.4,
+      "time": 26.26,
       "text": "(BIGBAT)"
     },
     {
-      "time": 0.84,
+      "time": 26.7,
       "text": "Ellerimi bırak, ışıklı caddelerden"
     },
     {
-      "time": 2.95,
+      "time": 28.81,
       "text": "Sensiz çiçekli bahçelerden"
     },
     {
-      "time": 6.25,
+      "time": 32.11,
       "text": "Geçtim tüm kahpelerden"
     },
     {
-      "time": 8.04,
+      "time": 33.9,
       "text": "Gençliğim esir ruhuma yaşarken (Ah)"
     },
     {
-      "time": 9.92,
+      "time": 35.78,
       "text": "Kaç polislerden, söz sana pırlantayı getir'cem ben (Ah)"
     },
     {
-      "time": 13.9,
+      "time": 39.76,
       "text": "Saklan istersen, ne fark eder kalbime hapisken?"
     },
     {
-      "time": 17.48,
+      "time": 43.34,
       "text": "Karakol ifade, \"Şşt\" dedim, \"rahat ol\""
     },
     {
-      "time": 19.57,
+      "time": 45.43,
       "text": "Çantayı avukata indirdim, alo"
     },
     {
-      "time": 21.57,
+      "time": 47.43,
       "text": "Ner'desin, kuzen? Bur'dayım, babo"
     },
     {
-      "time": 23.67,
+      "time": 49.53,
       "text": "Sadece MOBESE'ye verdim foto'"
     },
     {
-      "time": 25.84,
+      "time": 51.7,
       "text": "Düştük dalga geçtiğimiz hâle"
     },
     {
-      "time": 27.85,
+      "time": 53.71,
       "text": "Bulma artık bana bahane"
     },
     {
-      "time": 29.89,
+      "time": 55.75,
       "text": "Ettin yalanlarına alet"
     },
     {
-      "time": 31.71,
+      "time": 57.57,
       "text": "Sana, cenazeme açık davet"
     },
     {
-      "time": 33.11,
+      "time": 58.97,
       "text": "Siyah bi' Motorola, paket zula, işler tamam"
     },
     {
-      "time": 36.68,
+      "time": 62.54,
       "text": "Sana demiştim \"Kızım, bana bırak, her şey tamam\""
     },
     {
-      "time": 40.62,
+      "time": 66.48,
       "text": "Helal değil haram, zor oldu ama getirdim sana"
     },
     {
-      "time": 44.69,
+      "time": 70.55,
       "text": "Bilezik pırlanta, bilezik pırlanta"
     },
     {
-      "time": 48.6,
+      "time": 74.46,
       "text": "Siyah bi' Motorola, paket zula, işler tamam"
     },
     {
-      "time": 52.38,
+      "time": 78.24,
       "text": "Sana demiştim \"Kızım, bana bırak, her şey tamam\""
     },
     {
-      "time": 56.5,
+      "time": 82.36,
       "text": "Helal değil haram, zor oldu ama getirdim sana"
     },
     {
-      "time": 60.63,
+      "time": 86.49,
       "text": "Bilezik pırlanta, bilezik pırlanta"
     },
     {
-      "time": 64.93,
+      "time": 90.79,
       "text": "Bu dert yer bitirir adamı"
     },
     {
-      "time": 66.69,
+      "time": 92.55,
       "text": "Bana da böylesi denk geliyo', adamım"
     },
     {
-      "time": 69.22,
+      "time": 95.08,
       "text": "Annem bile sana düşman"
     },
     {
-      "time": 70.68,
+      "time": 96.54,
       "text": "Ama ben hâlâ senden tarafım"
     },
     {
-      "time": 73.07,
+      "time": 98.93,
       "text": "Allah'ım, görüyo' yananı"
     },
     {
-      "time": 74.67,
+      "time": 100.53,
       "text": "Evimde yanar sokak lambaları"
     },
     {
-      "time": 76.65,
+      "time": 102.51,
       "text": "Çıkmaz sandın ortaya yalanın"
     },
     {
-      "time": 78.62,
+      "time": 104.48,
       "text": "Sen sen sandın yalnız kalanı"
     },
     {
-      "time": 81.72,
+      "time": 107.58,
       "text": "Bir ihtimal vedalaşırız, neler gördüm ben bu hayatta"
     },
     {
-      "time": 84.13,
+      "time": 109.99,
       "text": "Kalbim kırık, n'olucak? Kızım, hâlâ istiyo'sun pırlanta"
     },
     {
-      "time": 89.82,
+      "time": 115.68,
       "text": "Belki tekrar karşılaşırız, belki ağlatırsın yeniden"
     },
     {
-      "time": 93.7,
+      "time": 119.56,
       "text": "Kolundaysa bilezik pırlanta"
     },
     {
-      "time": 98.5,
+      "time": 124.36,
       "text": "Siyah bi' Motorola, paket zula, işler tamam"
     },
     {
-      "time": 102.58,
+      "time": 128.44,
       "text": "Sana demiştim \"Kızım, bana bırak, her şey tamam\""
     },
     {
-      "time": 106.49,
+      "time": 132.35,
       "text": "Helal değil haram, zor oldu ama getirdim sana"
     },
     {
-      "time": 110.56,
+      "time": 136.42,
       "text": "Bilezik pırlanta, bilezik pırlanta"
     },
     {
-      "time": 114.57,
+      "time": 140.43,
       "text": "Siyah bi' Motorola, paket zula, işler tamam"
     },
     {
-      "time": 118.96,
+      "time": 144.82,
       "text": "Sana demiştim \"Kızım, bana bırak, her şey tamam\""
     },
     {
-      "time": 122.58,
+      "time": 148.44,
       "text": "Helal değil haram, zor oldu ama getirdim sana"
     },
     {
-      "time": 126.56,
+      "time": 152.42,
       "text": "Bilezik pırlanta, bilezik pırlanta"
     }
   ],
   "yaramaz": [
     {
-      "time": 2.1,
+      "time": 26.3,
       "text": "(E-Edokaleen)"
     },
     {
-      "time": 3.69,
+      "time": 27.89,
       "text": "(KIMO)"
     },
     {
-      "time": 4.66,
+      "time": 28.86,
       "text": "Seninle çok ortak konum var"
     },
     {
-      "time": 6.47,
+      "time": 30.67,
       "text": "Ama çok farklı oldu konumlar"
     },
     {
-      "time": 8.76,
+      "time": 32.96,
       "text": "Bize artık derler \"Yabancı\""
     },
     {
-      "time": 10.17,
+      "time": 34.37,
       "text": "Aydınlığa çıkmaz bu yollar"
     },
     {
-      "time": 11.89,
+      "time": 36.09,
       "text": "Hiç bitmek bilmiyo' sorunlar"
     },
     {
-      "time": 13.82,
+      "time": 38.02,
       "text": "Bugünler idare peki yarınlar?"
     },
     {
-      "time": 15.9,
+      "time": 40.1,
       "text": "Rüyalarım hâlâ zavallı"
     },
     {
-      "time": 17.68,
+      "time": 41.88,
       "text": "Ve kuşkum hep dolanıyo’ yanımda"
     },
     {
-      "time": 20.29,
+      "time": 44.49,
       "text": "Bana bi' gül verdin, arada gülümserdin"
     },
     {
-      "time": 23.2,
+      "time": 47.4,
       "text": "Bilirdim hepsi yalandan"
     },
     {
-      "time": 25.43,
+      "time": 49.63,
       "text": "Ama bunu ben seçtim"
     },
     {
-      "time": 27.24,
+      "time": 51.44,
       "text": "Sen en güzel yaşımdın"
     },
     {
-      "time": 29.19,
+      "time": 53.39,
       "text": "Canımla yarışırdın"
     },
     {
-      "time": 30.92,
+      "time": 55.12,
       "text": "Sana bi' dünya kurdum"
     },
     {
-      "time": 32.42,
+      "time": 56.62,
       "text": "Beni kimle karıştırdın"
     },
     {
-      "time": 35.35,
+      "time": 59.55,
       "text": "Değil kaybetmek normal (Normal)"
     },
     {
-      "time": 38.21,
+      "time": 62.41,
       "text": "Ben hep kazanırdım (Ben hep kazanırdım)"
     },
     {
-      "time": 42.61,
+      "time": 66.81,
       "text": "A-a-artık kırıldı karma"
     },
     {
-      "time": 46.02,
+      "time": 70.22,
       "text": "Kötüler kazandı (Kötüler kazandı)"
     },
     {
-      "time": 50.82,
+      "time": 75.02,
       "text": "Kızım bende öldü duygular"
     },
     {
-      "time": 51.57,
+      "time": 75.77,
       "text": "Bitti hislerim"
     },
     {
-      "time": 52.41,
+      "time": 76.61,
       "text": "Sen kazandın al kırık kalbimi"
     },
     {
-      "time": 54.23,
+      "time": 78.43,
       "text": "Yanında götür o yaramaz"
     },
     {
-      "time": 56.99,
+      "time": 81.19,
       "text": "Sana yaranmaya binbir dereden sular taşıdım"
     },
     {
-      "time": 59.69,
+      "time": 83.89,
       "text": "Yara kaşıdın, yar olmaz senden bana (Ah)"
     },
     {
-      "time": 62.93,
+      "time": 87.13,
       "text": "Senin aşkın yaramaz (Yaramaz)"
     },
     {
-      "time": 65.58,
+      "time": 89.78,
       "text": "Yaralanmadan yaşamak imkânsız"
     },
     {
-      "time": 67.35,
+      "time": 91.55,
       "text": "Geçmez asla günlerim kansız"
     },
     {
-      "time": 69.33,
+      "time": 93.53,
       "text": "Dinsizin hakkından gelir imansız"
     },
     {
-      "time": 71.16,
+      "time": 95.36,
       "text": "Masamda dansöz yaver şansım"
     },
     {
-      "time": 73.11,
+      "time": 97.31,
       "text": "Sensiz olmazdı ve yapamazdım"
     },
     {
-      "time": 75.2,
+      "time": 99.4,
       "text": "Nasıl değiştim inanamazsın"
     },
     {
-      "time": 76.84,
+      "time": 101.04,
       "text": "Dikenler ezdim güllere bastım"
     },
     {
-      "time": 78.58,
+      "time": 102.78,
       "text": "Seninle olanlar seninle kalsın"
     },
     {
-      "time": 80.39,
+      "time": 104.59,
       "text": "Değil kaybetmek normal (Normal)"
     },
     {
-      "time": 83.57,
+      "time": 107.77,
       "text": "Ben hep kazanırdım (Ben hep kazanırdım)"
     },
     {
-      "time": 87.53,
+      "time": 111.73,
       "text": "A-a-artık kırıldı karma"
     },
     {
-      "time": 91.11,
+      "time": 115.31,
       "text": "Kötüler kazandı (Kötüler kazandı)"
     },
     {
-      "time": 95.16,
+      "time": 119.36,
       "text": "Kızım bende öldü duygular"
     },
     {
-      "time": 96.6,
+      "time": 120.8,
       "text": "Bitti hislerim"
     },
     {
-      "time": 97.52,
+      "time": 121.72,
       "text": "Sen kazandın al kırık kalbimi"
     },
     {
-      "time": 99.56,
+      "time": 123.76,
       "text": "Yanında götür o yaramaz"
     },
     {
-      "time": 102.25,
+      "time": 126.45,
       "text": "Sana yaranmaya binbir dereden sular taşıdım"
     },
     {
-      "time": 105.05,
+      "time": 129.25,
       "text": "Yara kaşıdın, yar olmaz senden bana (Ah)"
     },
     {
-      "time": 108.25,
+      "time": 132.45,
       "text": "Senin aşkın yaramaz (Yaramaz)"
     },
     {
-      "time": 111.13,
+      "time": 135.33,
       "text": "Kızım bende öldü duygular"
     },
     {
-      "time": 112.72,
+      "time": 136.92,
       "text": "Bitti hislerim"
     },
     {
-      "time": 113.6,
+      "time": 137.8,
       "text": "Sen kazandın al kırık kalbimi"
     },
     {
-      "time": 114.73,
+      "time": 138.93,
       "text": "Yanında götür o yaramaz"
     },
     {
-      "time": 117.61,
+      "time": 141.81,
       "text": "Sana yaranmaya binbir dereden sular taşıdım"
     },
     {
-      "time": 120.28,
+      "time": 144.48,
       "text": "Yara kaşıdın, yar olmaz senden bana (Ah)"
     },
     {
-      "time": 123.59,
+      "time": 147.79,
       "text": "Senin aşkın yaramaz (Yaramaz)"
     }
   ],
   "yesler": [
     {
-      "time": 0.7,
+      "time": 23.73,
       "text": "(Ya)"
     },
     {
-      "time": 1.74,
+      "time": 24.77,
       "text": "Piyasadayız, CLTR ekip"
     },
     {
-      "time": 3.13,
+      "time": 26.16,
       "text": "Stüdyonun içine düşen yanıyo'"
     },
     {
-      "time": 4.61,
+      "time": 27.64,
       "text": "34 sizi, araba asfaltı"
     },
     {
-      "time": 6.37,
+      "time": 29.4,
       "text": "Influencer benimkini ****"
     },
     {
-      "time": 8.39,
+      "time": 31.42,
       "text": "Re-Reder'le birlikte sistematik"
     },
     {
-      "time": 9.88,
+      "time": 32.91,
       "text": "Tik-tik tak, dedik ya \"Kural basit, basit\""
     },
     {
-      "time": 12.18,
+      "time": 35.21,
       "text": "Hâlâ ASICS, \"¡Hala Madrid!\""
     },
     {
-      "time": 13.73,
+      "time": 36.76,
       "text": "Çok kastınız sanki Android"
     },
     {
-      "time": 15.58,
+      "time": 38.61,
       "text": "Seslen bana \"Aşkım\", babalar gibi rap"
     },
     {
-      "time": 17.52,
+      "time": 40.55,
       "text": "Kızlar beni hep \"Yes\"ler, \"Yes\"ler"
     },
     {
-      "time": 19.38,
+      "time": 42.41,
       "text": "Sordu \"Ner'desin?\", dedim \"Bur'dayım\""
     },
     {
-      "time": 21.17,
+      "time": 44.2,
       "text": "Yazıyo'm \"No at\", \"Yes\" der, \"Yes\" der"
     },
     {
-      "time": 23.0,
+      "time": 46.03,
       "text": "No-Nokia tele' çalıyo' gene"
     },
     {
-      "time": 24.94,
+      "time": 47.97,
       "text": "Ama açamam (A-ah, a-ah)"
     },
     {
-      "time": 26.89,
+      "time": 49.92,
       "text": "Kafa bi' porsiyon"
     },
     {
-      "time": 28.23,
+      "time": 51.26,
       "text": "İki oldu ama doyamam"
     },
     {
-      "time": 30.77,
+      "time": 53.8,
       "text": "Hazır mısın? Çıkalım"
     },
     {
-      "time": 32.44,
+      "time": 55.47,
       "text": "Ben hazırım, sizi bekliyorum"
     },
     {
-      "time": 34.39,
+      "time": 57.42,
       "text": "O-o zaman bugün uçalım"
     },
     {
-      "time": 35.98,
+      "time": 59.01,
       "text": "Uçarken kanat takmıyorum"
     },
     {
-      "time": 37.36,
+      "time": 60.39,
       "text": "Okay, geldi zaman"
     },
     {
-      "time": 39.09,
+      "time": 62.12,
       "text": "Gece sonu falan filan"
     },
     {
-      "time": 40.92,
+      "time": 63.95,
       "text": "Ablam, yok vallah param"
     },
     {
-      "time": 42.76,
+      "time": 65.79,
       "text": "Yavrum, sana çiçek alamam"
     },
     {
-      "time": 44.93,
+      "time": 67.96,
       "text": "Okay, geldi zaman, zaman"
     },
     {
-      "time": 46.6,
+      "time": 69.63,
       "text": "Seni görmezsem uyuyamam"
     },
     {
-      "time": 48.45,
+      "time": 71.48,
       "text": "Muhabbet olur saçma sapan"
     },
     {
-      "time": 50.22,
+      "time": 73.25,
       "text": "Boş ver, geçelim uzatmadan"
     },
     {
-      "time": 52.05,
+      "time": 75.08,
       "text": "Ma-Mamak'tan sevgiler"
     },
     {
-      "time": 53.93,
+      "time": 76.96,
       "text": "Yanımda Kanak gurbetçiler"
     },
     {
-      "time": 55.8,
+      "time": 78.83,
       "text": "Arttı bi' anda beklentiler"
     },
     {
-      "time": 57.57,
+      "time": 80.6,
       "text": "\"Beyler\" değil, \"Beyefendiler\""
     },
     {
-      "time": 59.36,
+      "time": 82.39,
       "text": "Da-damsız girişler çünkü nam var"
     },
     {
-      "time": 61.25,
+      "time": 84.28,
       "text": "Dam yok ama iki dak'kaya damlar, damlar"
     },
     {
-      "time": 63.72,
+      "time": 86.75,
       "text": "Herkese bol şanslar"
     },
     {
-      "time": 65.1,
+      "time": 88.13,
       "text": "Dayanabilirsen dayan, Ali Cabbar, Cabbar"
     },
     {
-      "time": 67.56,
+      "time": 90.59,
       "text": "Sen sağ, ben selamet"
     },
     {
-      "time": 68.77,
+      "time": 91.8,
       "text": "Yani komşu kızın bana emanet, haha"
     },
     {
-      "time": 71.02,
+      "time": 94.05,
       "text": "Yoruldum, yaptım hararet"
     },
     {
-      "time": 72.62,
+      "time": 95.65,
       "text": "Neyse, sen gene hakkını helal et bana"
     },
     {
-      "time": 74.61,
+      "time": 97.64,
       "text": "Ha-hazır mısın? Çıkalım"
     },
     {
-      "time": 76.6,
+      "time": 99.63,
       "text": "Ben hazırım, sizi bekliyorum"
     },
     {
-      "time": 78.42,
+      "time": 101.45,
       "text": "O-o zaman bugün uçalım"
     },
     {
-      "time": 80.26,
+      "time": 103.29,
       "text": "Uçarken kanat takmıyorum"
     },
     {
-      "time": 82.05,
+      "time": 105.08,
       "text": "Okay, geldi zaman"
     },
     {
-      "time": 83.37,
+      "time": 106.4,
       "text": "Gece sonu falan filan"
     },
     {
-      "time": 85.31,
+      "time": 108.34,
       "text": "Ablam, yok vallah param"
     },
     {
-      "time": 87.1,
+      "time": 110.13,
       "text": "Yavrum, sana çiçek alamam"
     },
     {
-      "time": 89.06,
+      "time": 112.09,
       "text": "Okay, geldi zaman, zaman"
     },
     {
-      "time": 90.9,
+      "time": 113.93,
       "text": "Seni görmezsem uyuyamam"
     },
     {
-      "time": 92.69,
+      "time": 115.72,
       "text": "Muhabbet olur saçma sapan"
     },
     {
-      "time": 94.56,
+      "time": 117.59,
       "text": "Boş ver, geçelim uzatmadan"
     },
     {
-      "time": 102.54,
+      "time": 125.57,
       "text": "(ya-yaparsovunuenes)"
     },
     {
-      "time": 110.95,
+      "time": 133.98,
       "text": "(pan-panmadeit)"
     }
   ],
@@ -4995,7 +4996,7 @@ export const BUILTIN_SYNCED_LYRICS: Record<string, SyncedLineData[]> = {
       "text": "Atara gidеr, basar ve gider, fazla zıplayan pazara gider"
     },
     {
-      "time": 52.0,
+      "time": 52,
       "text": "Araya girеn araya gider, kurallar bayağı basit, basit"
     },
     {
@@ -5133,151 +5134,151 @@ export const BUILTIN_SYNCED_LYRICS: Record<string, SyncedLineData[]> = {
   ],
   "alisamadim": [
     {
-      "time": 1.7,
+      "time": 7.92,
       "text": "(B-B-BIGBAT)"
     },
     {
-      "time": 4.94,
+      "time": 11.16,
       "text": "Kanatlarım var, kurtuldum yalanlarından"
     },
     {
-      "time": 8.32,
+      "time": 14.54,
       "text": "Zamanla insan vazgeçer yarınlarından"
     },
     {
-      "time": 12.85,
+      "time": 19.07,
       "text": "Yaralarımla çıktım tüm savaşlarımdan"
     },
     {
-      "time": 16.62,
+      "time": 22.84,
       "text": "Sana bir yürek ayırdım kalanlarımdan"
     },
     {
-      "time": 19.12,
+      "time": 25.34,
       "text": "Onun isteği son model araba, benimse sadece kurtulmak yaradan"
     },
     {
-      "time": 22.94,
+      "time": 29.16,
       "text": "Kızım, unuttun galiba, ben geliyorum kaybedenlerin olduğu diyardan"
     },
     {
-      "time": 26.66,
+      "time": 32.88,
       "text": "Onu gördüğüm günden beri istesem de kurtulamıyorum ki beladan"
     },
     {
-      "time": 30.62,
+      "time": 36.84,
       "text": "Hey-yeah, gözleri eladan, koynumda besledim yılanları"
     },
     {
-      "time": 36.06,
+      "time": 42.28,
       "text": "Gözüme bak, söyle, sevmedin mi hiç beni?"
     },
     {
-      "time": 39.98,
+      "time": 46.2,
       "text": "Yerine koyamadım asla başka birilerini"
     },
     {
-      "time": 43.94,
+      "time": 50.16,
       "text": "Ne yazık bana, tanıyamamışım seni"
     },
     {
-      "time": 47.97,
+      "time": 54.19,
       "text": "Yatamıyo'm hâlâ geceleri"
     },
     {
-      "time": 49.86,
+      "time": 56.08,
       "text": "Alışamadım"
     },
     {
-      "time": 51.45,
+      "time": 57.67,
       "text": "Sensiz yapamadım"
     },
     {
-      "time": 53.17,
+      "time": 59.39,
       "text": "Bu benim suçum mu?"
     },
     {
-      "time": 55.35,
+      "time": 61.57,
       "text": "Bu benim suçum mu?"
     },
     {
-      "time": 57.49,
+      "time": 63.71,
       "text": "Hep seni aradım"
     },
     {
-      "time": 59.45,
+      "time": 65.67,
       "text": "Sensiz yapamadım"
     },
     {
-      "time": 61.2,
+      "time": 67.42,
       "text": "Bu benim suçum mu?"
     },
     {
-      "time": 63.22,
+      "time": 69.44,
       "text": "Bu benim suçum mu? (Ah-ah-ah)"
     },
     {
-      "time": 67.65,
+      "time": 73.87,
       "text": "İnatlarınla bıktırdın beni sevdadan (Ah-ah)"
     },
     {
-      "time": 71.68,
+      "time": 77.9,
       "text": "Yakanda elim, ahım var, bunu unutma (Ah-ah)"
     },
     {
-      "time": 75.62,
+      "time": 81.84,
       "text": "Eğer kolaysa at gitsin kalan ne varsa"
     },
     {
-      "time": 79.41,
+      "time": 85.63,
       "text": "Ve hep palavra, duyduklarım hep palavra (Ah-ah)"
     },
     {
-      "time": 82.74,
+      "time": 88.96,
       "text": "En güzel yaşlarımı aldın, bu aşkta sensin katil"
     },
     {
-      "time": 86.77,
+      "time": 92.99,
       "text": "Hayallerimi dağıttın, bana beni ver kâfi"
     },
     {
-      "time": 90.89,
+      "time": 97.11,
       "text": "Kalabalıkta yalnız, verdiğin sözler hani?"
     },
     {
-      "time": 94.44,
+      "time": 100.66,
       "text": "Bu gecelik gel bari"
     },
     {
-      "time": 96.98,
+      "time": 103.2,
       "text": "Alışamadım"
     },
     {
-      "time": 98.96,
+      "time": 105.18,
       "text": "Sensiz yapamadım"
     },
     {
-      "time": 100.76,
+      "time": 106.98,
       "text": "Bu benim suçum mu?"
     },
     {
-      "time": 102.75,
+      "time": 108.97,
       "text": "Bu benim suçum mu?"
     },
     {
-      "time": 104.79,
+      "time": 111.01,
       "text": "Hep seni aradım"
     },
     {
-      "time": 106.81,
+      "time": 113.03,
       "text": "Sensiz yapamadım"
     },
     {
-      "time": 108.52,
+      "time": 114.74,
       "text": "Bu benim suçum mu?"
     },
     {
-      "time": 137.78,
+      "time": 144,
       "text": "Bu benim suçum mu?"
     }
   ],
@@ -5881,199 +5882,199 @@ export const BUILTIN_SYNCED_LYRICS: Record<string, SyncedLineData[]> = {
   ],
   "yazik_sana": [
     {
-      "time": 0.5,
+      "time": 19.31,
       "text": "(Ah)"
     },
     {
-      "time": 1.76,
+      "time": 20.57,
       "text": "Tüm rapçiler fiyasko, yüzlerinde maske"
     },
     {
-      "time": 4.6,
+      "time": 23.41,
       "text": "Aileme asker ben (Ah)"
     },
     {
-      "time": 7.12,
+      "time": 25.93,
       "text": "Götün yerse kastet, buraları kasvet"
     },
     {
-      "time": 9.44,
+      "time": 28.25,
       "text": "Kararıyoruz kederden"
     },
     {
-      "time": 12.02,
+      "time": 30.83,
       "text": "Hep eksi bilanço, sıktı beni bu mahalle"
     },
     {
-      "time": 14.39,
+      "time": 33.2,
       "text": "Koleksiyon yaptım şişelerden"
     },
     {
-      "time": 17.11,
+      "time": 35.92,
       "text": "Kurudu gönül bahçem, kırıldı kanatlarım"
     },
     {
-      "time": 19.44,
+      "time": 38.25,
       "text": "Hayatla yeni tanışırken"
     },
     {
-      "time": 20.9,
+      "time": 39.71,
       "text": "Sana dedim \"Var bi' yol, inan bana\""
     },
     {
-      "time": 23.33,
+      "time": 42.14,
       "text": "Geceleri tutmuyor uyku hâlâ"
     },
     {
-      "time": 25.76,
+      "time": 44.57,
       "text": "Çıkıp geldik evimizden uzaklara"
     },
     {
-      "time": 28.44,
+      "time": 47.25,
       "text": "Haram para ve de bi'çok yara"
     },
     {
-      "time": 31.1,
+      "time": 49.91,
       "text": "Es ist okay, okay, yaşadıkça dâhiliz bu oyuna"
     },
     {
-      "time": 35.89,
+      "time": 54.7,
       "text": "Anılarım eskidi, indirdim duvardan resmini, ah-ah"
     },
     {
-      "time": 41.72,
+      "time": 60.53,
       "text": "İsterim unut beni, doğaldı hislerim bulut gibi"
     },
     {
-      "time": 45.89,
+      "time": 64.7,
       "text": "Bana soru sorma, sorma"
     },
     {
-      "time": 49.04,
+      "time": 67.85,
       "text": "Bunlar artık normal, normal"
     },
     {
-      "time": 51.32,
+      "time": 70.13,
       "text": "Gözlerim kan doldu bugüne dеk ama"
     },
     {
-      "time": 53.69,
+      "time": 72.5,
       "text": "Ama, ama, ama"
     },
     {
-      "time": 55.84,
+      "time": 74.65,
       "text": "Sahte sadakat ve sahte bi' sеvgili"
     },
     {
-      "time": 58.62,
+      "time": 77.43,
       "text": "Yalan, yalan, yalan"
     },
     {
-      "time": 60.85,
+      "time": 79.66,
       "text": "Bozdur, harca, bir günde bitir hepsini"
     },
     {
-      "time": 63.26,
+      "time": 82.07,
       "text": "Gibi para, para, para"
     },
     {
-      "time": 65.82,
+      "time": 84.63,
       "text": "Son sözümü bile hiç merak etmedin"
     },
     {
-      "time": 68.64,
+      "time": 87.45,
       "text": "Yazık sana, sana"
     },
     {
-      "time": 71.53,
+      "time": 90.34,
       "text": "A-arar bulur bela beni, bulamadım yolumu"
     },
     {
-      "time": 73.81,
+      "time": 92.62,
       "text": "Daraldım hep sıkıntı, gözlerimden okudun mu?"
     },
     {
-      "time": 76.6,
+      "time": 95.41,
       "text": "Gözünü kırpmadan asıldı tetiğe"
     },
     {
-      "time": 79.31,
+      "time": 98.12,
       "text": "Çocuk üşür sokaklarda hep var diye"
     },
     {
-      "time": 81.47,
+      "time": 100.28,
       "text": "Sokak lambaları altında gölgeler dans eder"
     },
     {
-      "time": 83.91,
+      "time": 102.72,
       "text": "Delikanlı adam severse gönlüne hapseder"
     },
     {
-      "time": 86.51,
+      "time": 105.32,
       "text": "Kan değdi dişine, bakmaz üç beşine"
     },
     {
-      "time": 89.03,
+      "time": 107.84,
       "text": "Ödül dönmek eve sırtında leş ile"
     },
     {
-      "time": 91.36,
+      "time": 110.17,
       "text": "İsterim unut beni, doğaldı hislerim bulut gibi"
     },
     {
-      "time": 95.81,
+      "time": 114.62,
       "text": "Bana soru sorma, sorma"
     },
     {
-      "time": 98.34,
+      "time": 117.15,
       "text": "Bunlar artık normal, normal"
     },
     {
-      "time": 100.89,
+      "time": 119.7,
       "text": "Gözlerim kan doldu bugüne dek ama"
     },
     {
-      "time": 103.64,
+      "time": 122.45,
       "text": "Ama, ama, ama"
     },
     {
-      "time": 105.8,
+      "time": 124.61,
       "text": "Sahte sadakat ve sahte bi' sevgili"
     },
     {
-      "time": 108.74,
+      "time": 127.55,
       "text": "Yalan, yalan, yalan"
     },
     {
-      "time": 110.84,
+      "time": 129.65,
       "text": "Bozdur, harca, bir günde bitir hepsini"
     },
     {
-      "time": 113.34,
+      "time": 132.15,
       "text": "Gibi para, para, para"
     },
     {
-      "time": 115.88,
+      "time": 134.69,
       "text": "Son sözümü bile hiç merak etmedin"
     },
     {
-      "time": 118.63,
+      "time": 137.44,
       "text": "Yazık sana, sana"
     },
     {
-      "time": 123.72,
+      "time": 142.53,
       "text": "(Ama, ama, ama)"
     },
     {
-      "time": 128.91,
+      "time": 147.72,
       "text": "(Yalan, yalan, yalan)"
     },
     {
-      "time": 133.85,
+      "time": 152.66,
       "text": "(Para, para, para)"
     },
     {
-      "time": 138.73,
+      "time": 157.54,
       "text": "(Yazık sana, sana)"
     }
   ],
@@ -6317,7 +6318,7 @@ export const BUILTIN_SYNCED_LYRICS: Record<string, SyncedLineData[]> = {
       "text": "Yarattın sorunlar"
     },
     {
-      "time": 78.0,
+      "time": 78,
       "text": "Fark ettim, benimle zorun var"
     },
     {
@@ -6347,172 +6348,173 @@ export const BUILTIN_SYNCED_LYRICS: Record<string, SyncedLineData[]> = {
   ],
   "sorma": [
     {
-      "time": 1.0,
+      "time": 16.71,
       "text": "Su gibi akar saniyeler"
     },
     {
-      "time": 2.29,
+      "time": 18,
       "text": "Benim kafamda dönüyo'sun sadece sen"
     },
     {
-      "time": 4.52,
+      "time": 20.23,
       "text": "Seni dün dört duvarda katil eden"
     },
     {
-      "time": 6.36,
+      "time": 22.07,
       "text": "Döner arkasını ve seni takip eder"
     },
     {
-      "time": 8.51,
+      "time": 24.22,
       "text": "Bi' gün beni vurabil'ceğini tahmin ederdim"
     },
     {
-      "time": 11.09,
+      "time": 26.8,
       "text": "Ama dedim ki \"Yok, daha neler\""
     },
     {
-      "time": 12.92,
+      "time": 28.63,
       "text": "Çocuk, \"Bana bi' şey olmaz\" deme"
     },
     {
-      "time": 14.54,
+      "time": 30.25,
       "text": "Annen gözyaşı dökerse çok fark eder (O-o-oh)"
     },
     {
-      "time": 16.51,
+      "time": 32.22,
       "text": "Rüzgâr gibi seneler, çok değiştim"
     },
     {
-      "time": 18.65,
+      "time": 34.36,
       "text": "İstemeden olsa da pislikleştim (A-ah, o-oh)"
     },
     {
-      "time": 20.81,
+      "time": 36.52,
       "text": "Gide gele kalbimden hissizleştin (A-ah)"
     },
     {
-      "time": 22.87,
+      "time": 38.58,
       "text": "Başkaydın ama sen herkesleştin (O-o-o-o-oh)"
     },
     {
-      "time": 24.72,
+      "time": 40.43,
       "text": "Ne yaptıysam olmadı neyse geçtim"
     },
     {
-      "time": 26.71,
+      "time": 42.42,
       "text": "Edindik tecrübe neyse gençtim"
     },
     {
-      "time": 28.92,
+      "time": 44.63,
       "text": "Beni senden iten bi' şey vardı"
     },
     {
-      "time": 30.9,
+      "time": 46.61,
       "text": "Ama ben yine de seni seçtim (U-u-uh)"
     },
     {
-      "time": 32.31,
+      "time": 48.02,
       "text": "Bi' savaşın içindeydim, kimin kazandığını sorma (A-ah, o-oh)"
     },
     {
-      "time": 36.18,
+      "time": 51.89,
       "text": "O savaştan çıktım, nasıl olduğumu sorma (A-ah, o-o-o-o-o-oh)"
     },
     {
-      "time": 38.31,
+      "time": 54.02,
       "text": "Belki de vuran sendin ama fark etmez daha"
     },
     {
-      "time": 43.82,
+      "time": 59.53,
       "text": "\"Kurtuldum\" derken kayboldum günahlarımla"
     },
     {
-      "time": 48.41,
+      "time": 64.12,
       "text": "Bi' savaşın içindeydim, kimin kazandığını sorma"
     },
     {
-      "time": 52.49,
+      "time": 68.2,
       "text": "O savaştan çıktım, nasıl olduğumu sorma"
     },
     {
-      "time": 55.42,
+      "time": 71.13,
       "text": "Belki de vuran sendin ama fark etmez daha"
     },
     {
-      "time": 59.76,
+      "time": 75.47,
       "text": "\"Kurtuldum\" derken (U-u-uh) kayboldum günahlarımla"
     },
     {
-      "time": 65.22,
+      "time": 80.93,
       "text": "Bazen deliriyo' gibi hissediyorum"
     },
     {
-      "time": 67.03,
+      "time": 82.74,
       "text": "Bu, yaralı kardeşini yerde görmek gibi"
     },
     {
-      "time": 69.17,
+      "time": 84.88,
       "text": "Bazen nefes almak istemiyorum"
     },
     {
-      "time": 71.08,
+      "time": 86.79,
       "text": "Değilim sizin gibi çok heyecanlı biri"
     },
     {
-      "time": 73.34,
+      "time": 89.05,
       "text": "Beni soranlara seni gösteriyorum"
     },
     {
-      "time": 74.96,
+      "time": 90.67,
       "text": "Beni benden alıp gittiğinden beri"
     },
     {
-      "time": 77.36,
+      "time": 93.07,
       "text": "Nası' gittiysen geri dön, geri"
     },
     {
-      "time": 79.23,
+      "time": 94.94,
       "text": "Nası' geçer bu zaman? Söylesin biri"
     },
     {
-      "time": 81.09,
+      "time": 96.8,
       "text": "Sorarlar \"Neden değiştin?\" onlar, değişti tüm suratlar"
     },
     {
-      "time": 85.2,
+      "time": 100.91,
       "text": "Yazılmış kader onla, neden?"
     },
     {
-      "time": 89.17,
+      "time": 104.88,
       "text": "Toplar memurlar boş kovanlar, akrep eş yelkovanla"
     },
     {
-      "time": 93.86,
+      "time": 109.57,
       "text": "Sorarlar katilimi, o sen"
     },
     {
-      "time": 97.07,
+      "time": 112.78,
       "text": "U-u-uh, a-ah"
     },
     {
-      "time": 103.53,
+      "time": 119.24,
       "text": "U-uh, a-ah (B-B-BIGBAT)"
     },
     {
-      "time": 107.14,
+      "time": 122.85,
       "text": "U-u-u-u-u-uh (Alles gute LYNX)"
     },
     {
-      "time": 108.89,
+      "time": 124.6,
       "text": "U-u-uh (A-A-Alo Waxy)"
     },
     {
-      "time": 111.12,
+      "time": 126.83,
       "text": "(Deyjan, got the sauce, boy)"
     }
   ]
 };
 
+// EXACT Trim Settings
 export const BUILTIN_TRIMS: Record<string, TrackTrimData> = {
   "bak_ne_dicem": {
     "startSec": 0,

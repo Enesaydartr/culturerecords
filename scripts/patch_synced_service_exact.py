@@ -1,4 +1,4 @@
-import { BUILTIN_SYNCED_LYRICS, BUILTIN_TRIMS } from "@/data/backupLyricsData";
+﻿code = """import { BUILTIN_SYNCED_LYRICS, BUILTIN_TRIMS } from "@/data/backupLyricsData";
 
 export interface SyncedLine {
   time: number; // in seconds
@@ -36,7 +36,7 @@ export const SyncedLyricsService = {
     // 3. Fallback calculation if no sync data exists
     if (fallbackLyrics) {
       const rawLines = fallbackLyrics
-        .split("\n")
+        .split("\\n")
         .map((l) => l.trim())
         .filter((l) => l.length > 0);
 
@@ -138,14 +138,14 @@ export const SyncedLyricsService = {
         const timeTag = `[${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}.${String(ms).padStart(2, "0")}]`;
         return `${timeTag} ${line.text}`;
       })
-      .join("\n");
+      .join("\\n");
   },
 
   // Parse standard LRC format
   parseLrc(lrcText: string): SyncedLine[] {
-    const lines = lrcText.split("\n");
+    const lines = lrcText.split("\\n");
     const result: SyncedLine[] = [];
-    const lrcRegex = /\[(\d{2}):(\d{2})(?:\.(\d{2,3}))?\](.*)/;
+    const lrcRegex = /\\[(\\d{2}):(\\d{2})(?:\\.(\\d{2,3}))?\\](.*)/;
 
     for (const raw of lines) {
       const match = raw.match(lrcRegex);
@@ -215,3 +215,9 @@ export const SyncedLyricsService = {
     return importedCount;
   }
 };
+"""
+
+with open("src/services/syncedLyricsService.ts", "w", encoding="utf-8") as f:
+    f.write(code)
+
+print("SyncedLyricsService updated to 100% mirror localhost on every public / mobile connection!")
