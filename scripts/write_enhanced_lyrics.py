@@ -1,4 +1,4 @@
-export interface SyncedLine {
+﻿lyrics_service_code = """export interface SyncedLine {
   time: number; // in seconds
   text: string;
 }
@@ -27,7 +27,7 @@ export const SyncedLyricsService = {
 
     if (fallbackLyrics) {
       const rawLines = fallbackLyrics
-        .split("\n")
+        .split("\\n")
         .map((l) => l.trim())
         .filter((l) => l.length > 0);
 
@@ -113,44 +113,6 @@ export const SyncedLyricsService = {
   },
 
   // Shift all timestamps by an offset (positive or negative seconds)
-  getAllBackupData(): Record<string, any> {
-    const data: Record<string, any> = {};
-    for (let i = 0; i < localStorage.length; i++) {
-      const k = localStorage.key(i);
-      if (k && (k.startsWith(STORAGE_KEY_PREFIX) || k.startsWith(TRIM_KEY_PREFIX))) {
-        try {
-          data[k] = JSON.parse(localStorage.getItem(k) || "");
-        } catch {
-          data[k] = localStorage.getItem(k);
-        }
-      }
-    }
-    return data;
-  },
-
-  restoreAllBackupData(backupObj: Record<string, any>): boolean {
-    try {
-      Object.entries(backupObj).forEach(([k, v]) => {
-        if (k.startsWith(STORAGE_KEY_PREFIX) || k.startsWith(TRIM_KEY_PREFIX)) {
-          localStorage.setItem(k, typeof v === "string" ? v : JSON.stringify(v));
-        }
-      });
-      window.dispatchEvent(new CustomEvent("synced-lyrics-updated", { detail: {} }));
-      return true;
-    } catch {
-      return false;
-    }
-  },
-
-  exportLrc(lines: SyncedLine[]): string {
-    return lines.map(l => {
-      const mins = Math.floor(l.time / 60).toString().padStart(2, "0");
-      const secs = Math.floor(l.time % 60).toString().padStart(2, "0");
-      const ms = Math.floor((l.time % 1) * 100).toString().padStart(2, "0");
-      return `[${mins}:${secs}.${ms}]${l.text}`;
-    }).join("\n");
-  },
-
   shiftTimestamps(lines: SyncedLine[], offsetSec: number): SyncedLine[] {
     return lines.map((line) => ({
       ...line,
@@ -158,3 +120,9 @@ export const SyncedLyricsService = {
     }));
   }
 };
+"""
+
+with open("src/services/syncedLyricsService.ts", "w", encoding="utf-8") as f:
+    f.write(lyrics_service_code)
+
+print("Enhanced syncedLyricsService.ts written successfully!")
