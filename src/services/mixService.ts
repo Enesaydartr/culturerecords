@@ -275,5 +275,83 @@ export const MixService = {
     };
 
     return mixTrack;
+  },
+
+  /**
+   * Get all comments for a given mix ID
+   */
+  getMixComments(mixId: string): MixComment[] {
+    this.init();
+    try {
+      const all: MixComment[] = JSON.parse(localStorage.getItem(MIX_COMMENTS_KEY) || "[]");
+      return all.filter((c) => c.mixId === mixId).sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+    } catch {
+      return [];
+    }
+  },
+
+  /**
+   * Add a new comment to a mix
+   */
+  addMixComment(mixId: string, user: UserProfile, text: string): MixComment {
+    this.init();
+    const newComment: MixComment = {
+      id: "mix_comment_" + Date.now() + "_" + Math.random().toString(36).substring(2, 6),
+      mixId,
+      userId: user.id,
+      username: user.username,
+      userDisplayName: user.displayName,
+      userAvatar: user.avatar,
+      text: text.trim(),
+      createdAt: new Date().toISOString()
+    };
+
+    const allComments: MixComment[] = JSON.parse(localStorage.getItem(MIX_COMMENTS_KEY) || "[]");
+    allComments.push(newComment);
+    localStorage.setItem(MIX_COMMENTS_KEY, JSON.stringify(allComments));
+
+    // Update mix commentsCount
+    const allMixes = this.getAllMixes();
+    const idx = allMixes.findIndex((m) => m.id === mixId);
+    if (idx !== -1) {
+      allMixes[idx].commentsCount = (allMixes[idx].commentsCount || 0) + 1;
+      localStorage.setItem(MIXES_STORAGE_KEY, JSON.stringify(allMixes));
+    }
+
+    window.dispatchEvent(new CustomEvent("mix-comments-updated", { detail: { mixId } }));
+    window.dispatchEvent(new CustomEvent("mixes-updated"));
+    return newComment;
+  },
+
+  /**
+   * Delete a comment from a mix (by author or admin)
+   */
+  deleteMixComment(commentId: string, currentUser?: UserProfile | null): boolean {
+    if (!currentUser) return false;
+    try {
+      const allComments: MixComment[] = JSON.parse(localStorage.getItem(MIX_COMMENTS_KEY) || "[]");
+      const target = allComments.find((c) => c.id === commentId);
+      if (!target) return false;
+
+      const allowed = currentUser.role === "admin" || target.userId === currentUser.id;
+      if (!allowed) return false;
+
+      const filtered = allComments.filter((c) => c.id !== commentId);
+      localStorage.setItem(MIX_COMMENTS_KEY, JSON.stringify(filtered));
+
+      // Decrement mix commentsCount
+      const allMixes = this.getAllMixes();
+      const idx = allMixes.findIndex((m) => m.id === target.mixId);
+      if (idx !== -1) {
+        allMixes[idx].commentsCount = Math.max(0, (allMixes[idx].commentsCount || 1) - 1);
+        localStorage.setItem(MIXES_STORAGE_KEY, JSON.stringify(allMixes));
+      }
+
+      window.dispatchEvent(new CustomEvent("mix-comments-updated", { detail: { mixId: target.mixId } }));
+      window.dispatchEvent(new CustomEvent("mixes-updated"));
+      return true;
+    } catch {
+      return false;
+    }
   }
 };

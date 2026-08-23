@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { AuthService, UserProfile } from "@/services/authService";
 import { PLAYLIST, Track } from "@/data/artists";
 import { PlaylistService, UserPlaylist } from "@/services/playlistService";
-import { MixService, CommunityMix } from "@/services/mixService";
+import { MixService, CommunityMix, MixComment } from "@/services/mixService";
 import { SocialService, ChatMessage } from "@/services/socialService";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,10 +19,11 @@ interface RightSidebarDrawerProps {
   onOpenListenTogether?: () => void;
   onOpenAuthModal?: () => void;
   onUserProfileClick?: (userId: string) => void;
+  onAddToPlaylist?: (track: Track) => void;
 }
 
 export default function RightSidebarDrawer({
-  isOpen, onClose, onTrackPlay, onOpenMixModal, onOpenListenTogether, onOpenAuthModal, onUserProfileClick
+  isOpen, onClose, onTrackPlay, onOpenMixModal, onOpenListenTogether, onOpenAuthModal, onUserProfileClick, onAddToPlaylist
 }: RightSidebarDrawerProps) {
   const currentUser = AuthService.getCurrentUser();
   const [followUpdateTrigger, setFollowUpdateTrigger] = useState(0);
@@ -36,6 +37,13 @@ export default function RightSidebarDrawer({
 
   const [mixSort, setMixSort] = useState<"popular" | "liked" | "newest">("popular");
   const [mixes, setMixes] = useState<CommunityMix[]>(MixService.getAllMixes("popular"));
+  const [expandedMixCommentsId, setExpandedMixCommentsId] = useState<string | null>(null);
+  const [mixCommentInputs, setMixCommentInputs] = useState<Record<string, string>>({});
+  const [mixCommentsData, setMixCommentsData] = useState<Record<string, MixComment[]>>({});
+
+  const loadMixComments = (mixId: string) => {
+    setMixCommentsData((prev) => ({ ...prev, [mixId]: MixService.getMixComments(mixId) }));
+  };
 
   const [chatSubTab, setChatSubTab] = useState<"global" | "dm" | "users">("global");
   const [globalRoom, setGlobalRoom] = useState<string>("global1");
@@ -76,14 +84,22 @@ export default function RightSidebarDrawer({
     const handleMixUpdate = () => setMixes(MixService.getAllMixes(mixSort));
     const handleChatUpdate = () => setGlobalMessages(SocialService.getGlobalMessages(globalRoom));
 
+    const handleMixCommentsUpdate = (e: any) => {
+      if (e.detail?.mixId) {
+        loadMixComments(e.detail.mixId);
+      }
+    };
+
     window.addEventListener("playlists-updated", handlePlUpdate);
     window.addEventListener("mixes-updated", handleMixUpdate);
     window.addEventListener("global-chat-updated", handleChatUpdate);
+    window.addEventListener("mix-comments-updated", handleMixCommentsUpdate);
 
     return () => {
       window.removeEventListener("playlists-updated", handlePlUpdate);
       window.removeEventListener("mixes-updated", handleMixUpdate);
       window.removeEventListener("global-chat-updated", handleChatUpdate);
+      window.removeEventListener("mix-comments-updated", handleMixCommentsUpdate);
     };
   }, [mixSort, globalRoom]);
 
@@ -332,11 +348,43 @@ export default function RightSidebarDrawer({
 
                 <div className="space-y-1.5 max-h-72 overflow-y-auto pr-1">
                   {activePlaylist.trackIds.map((trackId, idx) => {
-                    const tr = PLAYLIST.find((t) => t.id === trackId);
+                    let tr = PLAYLIST.find((t) => t.id === trackId);
+                    if (!tr) {
+                      const m = MixService.getMixById(trackId);
+                      if (m) {
+                        tr = {
+                          id: m.id,
+                          title: m.title,
+                          artist: `${m.creatorName} (Remix)`,
+                          album: "Topluluk Miksleri",
+                          duration: "3:00",
+                          currentTime: "00:00",
+                          progress: 0,
+                          durationSec: 180,
+                          bpm: 140,
+                          key: "Auto",
+                          genre: "Community Remix",
+                          producers: m.creatorName,
+                          mixMaster: "Alliance Community",
+                          badge: "MİKS",
+                          category: "all",
+                          releaseDate: new Date(m.createdAt).toISOString().slice(0, 10),
+                          releaseYear: 2026,
+                          image: m.coverImage,
+                          spotifyUrl: "",
+                          embedUrl: "",
+                          youtubeId: "",
+                          lyrics: `[00:00.00] 🎧 ${m.title}\n[00:04.00] Remixer: ${m.creatorName}`,
+                          audioUrl: m.audioUrl,
+                          customAudioUrl: m.audioUrl,
+                          isMix: true
+                        };
+                      }
+                    }
                     if (!tr) return null;
                     return (
                       <div
-                        key={tr.id}
+                        key={tr.id + "_" + idx}
                         draggable
                         onDragStart={() => handleDragStart(idx)}
                         onDragOver={handleDragOver}
@@ -358,7 +406,17 @@ export default function RightSidebarDrawer({
                         <div className="flex items-center gap-1">
                           <button
                             type="button"
-                            onClick={() => onTrackPlay && onTrackPlay(tr)}
+                            onClick={async () => {
+                              if (tr?.isMix) {
+                                const m = MixService.getMixById(tr.id);
+                                if (m) {
+                                  const playable = await MixService.getPlayableTrackForMix(m);
+                                  if (onTrackPlay) onTrackPlay(playable);
+                                  return;
+                                }
+                              }
+                              if (onTrackPlay && tr) onTrackPlay(tr);
+                            }}
                             className="p-1 text-red-400 hover:text-white"
                             title="Çal"
                           >
@@ -366,7 +424,7 @@ export default function RightSidebarDrawer({
                           </button>
                           <button
                             type="button"
-                            onClick={() => PlaylistService.removeTrackFromPlaylist(activePlaylist.id, tr.id)}
+                            onClick={() => PlaylistService.removeTrackFromPlaylist(activePlaylist.id, tr!.id)}
                             className="p-1 text-neutral-600 hover:text-red-400"
                             title="Listeden Çıkar"
                           >
@@ -505,13 +563,47 @@ export default function RightSidebarDrawer({
                           <Heart className={`h-3.5 w-3.5 ${isLiked ? "fill-current" : ""}`} />
                           <span>{m.likesCount}</span>
                         </button>
+
                         <span className="flex items-center gap-1">
                           <Headphones className="h-3.5 w-3.5" />
                           <span>{m.totalListens}</span>
                         </span>
+
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if (expandedMixCommentsId === m.id) {
+                              setExpandedMixCommentsId(null);
+                            } else {
+                              setExpandedMixCommentsId(m.id);
+                              loadMixComments(m.id);
+                            }
+                          }}
+                          className={`flex items-center gap-1 hover:text-white transition-colors ${
+                            expandedMixCommentsId === m.id ? "text-red-400 font-bold" : ""
+                          }`}
+                          title="Yorumlar"
+                        >
+                          <MessageSquare className="h-3.5 w-3.5" />
+                          <span>{m.commentsCount || 0}</span>
+                        </button>
                       </div>
-                      <div className="flex items-center gap-2">
+
+                      <div className="flex items-center gap-1.5">
+                        <button
+                          type="button"
+                          onClick={async () => {
+                            const mixTrack = await MixService.getPlayableTrackForMix(m);
+                            if (onAddToPlaylist) onAddToPlaylist(mixTrack);
+                          }}
+                          className="p-1 text-neutral-400 hover:text-white hover:bg-white/10 transition-colors"
+                          title="Çalma Listesine Ekle"
+                        >
+                          <Plus className="h-3.5 w-3.5" />
+                        </button>
+
                         <span className="text-neutral-500">{new Date(m.createdAt).toLocaleDateString("tr-TR")}</span>
+
                         {(currentUser?.role === "admin" || (currentUser && m.creatorId === currentUser.id)) && (
                           <button
                             type="button"
@@ -529,6 +621,73 @@ export default function RightSidebarDrawer({
                         )}
                       </div>
                     </div>
+
+                    {/* Expandable Mix Comments Thread */}
+                    {expandedMixCommentsId === m.id && (
+                      <div className="pt-2.5 border-t border-white/10 space-y-2">
+                        <span className="text-[9px] font-bold text-neutral-400 uppercase tracking-wider block">
+                          MİKS YORUMLARI ({(mixCommentsData[m.id] || []).length})
+                        </span>
+
+                        <div className="space-y-1.5 max-h-40 overflow-y-auto pr-1">
+                          {(mixCommentsData[m.id] || []).length === 0 ? (
+                            <p className="text-[10px] text-neutral-500 italic">Henüz yorum yok. İlk yorumu siz yapın!</p>
+                          ) : (
+                            (mixCommentsData[m.id] || []).map((c) => (
+                              <div key={c.id} className="p-2 bg-black/50 border border-white/5 flex items-start justify-between gap-2 text-[10px]">
+                                <div className="min-w-0">
+                                  <div className="flex items-center gap-1.5">
+                                    <span className="font-bold text-white">{c.userDisplayName || c.username}</span>
+                                    <span className="text-[8px] text-neutral-500">{new Date(c.createdAt).toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit" })}</span>
+                                  </div>
+                                  <p className="text-neutral-300 break-words mt-0.5">{c.text}</p>
+                                </div>
+                                {(currentUser?.role === "admin" || currentUser?.id === c.userId) && (
+                                  <button
+                                    type="button"
+                                    onClick={() => MixService.deleteMixComment(c.id, currentUser)}
+                                    className="text-neutral-600 hover:text-red-400 p-0.5 shrink-0"
+                                    title="Yorumu Sil"
+                                  >
+                                    <Trash2 className="h-3 w-3" />
+                                  </button>
+                                )}
+                              </div>
+                            ))
+                          )}
+                        </div>
+
+                        {/* Comment Input Form */}
+                        <form
+                          onSubmit={(e) => {
+                            e.preventDefault();
+                            if (!currentUser) {
+                              if (onOpenAuthModal) onOpenAuthModal();
+                              return;
+                            }
+                            const text = (mixCommentInputs[m.id] || "").trim();
+                            if (!text) return;
+                            MixService.addMixComment(m.id, currentUser, text);
+                            setMixCommentInputs((prev) => ({ ...prev, [m.id]: "" }));
+                          }}
+                          className="flex gap-1.5 pt-1"
+                        >
+                          <input
+                            type="text"
+                            placeholder={currentUser ? "Miks hakkında bir yorum yazın..." : "Yorum yapmak için giriş yapın"}
+                            value={mixCommentInputs[m.id] || ""}
+                            onChange={(e) => setMixCommentInputs((prev) => ({ ...prev, [m.id]: e.target.value }))}
+                            className="flex-1 bg-black border border-white/15 px-2 py-1.5 text-[10px] text-white focus:border-red-500 focus:outline-none"
+                          />
+                          <button
+                            type="submit"
+                            className="px-2.5 py-1.5 bg-red-600 hover:bg-red-700 text-white font-bold text-[9px] uppercase tracking-wider transition-colors shrink-0"
+                          >
+                            GÖNDER
+                          </button>
+                        </form>
+                      </div>
+                    )}
                   </div>
                 );
               })}

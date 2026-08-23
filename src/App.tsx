@@ -474,7 +474,6 @@ export default function App() {
           <nav className="hidden lg:flex items-center gap-6 text-xs font-mono font-medium text-neutral-400">
             <a href="#alliance" className="transition-colors hover:text-white">SANATÇILAR HAKKINDA</a>
             <a href="#discography" className="transition-colors hover:text-white">DİSKOGRAFİ</a>
-            <a href="#community-mixes" className="transition-colors hover:text-white text-red-400 font-bold">🎧 MİKSLER</a>
             <a href="#news-section" className="transition-colors hover:text-white">HABERLER</a>
             <a href="#tour" className="transition-colors hover:text-white">KONSER TAKVİMİ</a>
           </nav>
@@ -792,99 +791,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* 5.5. COMMUNITY MIXES SHOWCASE */}
-      <section id="community-mixes" className="py-16 border-b border-white/[0.08] bg-black/40">
-        <div className="container space-y-8">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <div className="flex items-center gap-2 text-red-500 font-mono text-xs font-bold uppercase tracking-widest mb-1">
-                <Disc3 className="h-4 w-4 text-red-500 animate-spin" style={{ animationDuration: "6s" }} />
-                <span>TOPLULUK VE DİJİTAL REMİX VİTRİNİ</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-black text-white uppercase tracking-tight">
-                TOPLULUK MİKSLERİ
-              </h2>
-            </div>
 
-            <div className="flex items-center gap-3">
-              <Button
-                type="button"
-                onClick={() => {
-                  if (!currentUser) {
-                    setAuthModalMode("login");
-                    setIsAuthModalOpen(true);
-                    return;
-                  }
-                  setIsMixModalOpen(true);
-                }}
-                className="bg-red-600 hover:bg-red-700 text-white font-mono text-xs font-bold uppercase px-4 py-2 rounded-none flex items-center gap-2 shadow-lg active:scale-95 cursor-pointer"
-              >
-                <Plus className="h-4 w-4" /> KENDİ MİKSİNİ / MP3'ÜNÜ YÜKLE
-              </Button>
-            </div>
-          </div>
-
-          {mixesList.length === 0 ? (
-            <div className="border border-dashed border-white/15 p-8 text-center bg-black/30">
-              <Disc3 className="h-10 w-10 text-neutral-600 mx-auto mb-2" />
-              <p className="text-xs text-neutral-400 font-mono">Henüz bir miks paylaşılmamış. İlk miksi siz yükleyin!</p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {mixesList.map((m) => (
-                <div key={m.id} className="border border-white/10 bg-[#0d0d0d] p-4 flex gap-3.5 items-start group hover:border-red-500/50 transition-all">
-                  <div className="relative h-16 w-16 aspect-square shrink-0 border border-white/20 overflow-hidden">
-                    <img src={m.coverImage} alt={m.title} className="h-full w-full object-cover" />
-                    <button
-                      type="button"
-                      onClick={async () => {
-                        MixService.incrementMixListen(m.id);
-                        const mixTrack = await MixService.getPlayableTrackForMix(m);
-                        playTrack(mixTrack);
-                      }}
-                      className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity text-white cursor-pointer"
-                      title="Miksi Çal"
-                    >
-                      <Play className="h-7 w-7 fill-current text-white hover:text-red-500" />
-                    </button>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h4 className="text-xs font-bold text-white truncate group-hover:text-red-400 transition-colors">{m.title}</h4>
-                    <p className="text-[11px] text-neutral-400">Remixer: <button type="button" onClick={() => setViewingUserId(m.creatorId)} className="text-neutral-200 font-bold hover:text-red-400 hover:underline">{m.creatorName}</button></p>
-                    <p className="text-[10px] text-neutral-500 line-clamp-1 mt-0.5">{m.description}</p>
-                    <div className="flex items-center justify-between text-[10px] text-neutral-400 mt-2">
-                      <div className="flex items-center gap-3">
-                        <span>❤️ {m.likesCount}</span>
-                        <span>🎧 {m.totalListens} dinlenme</span>
-                      </div>
-                      {(currentUser?.role === "admin" || (currentUser && m.creatorId === currentUser.id)) && (
-                        <button
-                          type="button"
-                          onClick={async (e) => {
-                            e.stopPropagation();
-                            if (confirm(`"${m.title}" miksini silmek istediğinize emin misiniz?`)) {
-                              const res = await MixService.deleteMix(m.id, currentUser);
-                              if (res.success) {
-                                triggerToast(`"${m.title}" miksi başarıyla silindi.`);
-                              } else {
-                                alert(res.error || "Miks silinemedi.");
-                              }
-                            }
-                          }}
-                          className="p-1 text-neutral-500 hover:text-red-500 transition-colors cursor-pointer"
-                          title={currentUser?.role === "admin" ? "Yönetici Olarak Sil" : "Miksini Sil"}
-                        >
-                          <Trash2 className="h-3.5 w-3.5" />
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
 
       {/* 6. OFFICIAL NEWS SECTION */}
       <NewsSection
@@ -1403,6 +1310,7 @@ export default function App() {
         onUserProfileClick={(uid) => setViewingUserId(uid)}
         onClose={() => setIsRightDrawerOpen(false)}
         onTrackPlay={(t) => playTrack(t)}
+        onAddToPlaylist={(t) => setPlaylistModalTrack(t)}
         onOpenMixModal={() => setIsMixModalOpen(true)}
         onOpenListenTogether={() => setIsListenTogetherOpen(true)}
         onOpenAuthModal={() => {
