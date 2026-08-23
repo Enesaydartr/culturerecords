@@ -14,8 +14,8 @@ const STORAGE_KEY_PREFIX = "eray_mansur_synced_lyrics_";
 const TRIM_KEY_PREFIX = "eray_mansur_trim_";
 
 export const SyncedLyricsService = {
-  getSyncedLyrics(trackId: string, fallbackLyrics?: string, durationSec: number = 180): SyncedLine[] {
-    // 1. Check user custom edits in localStorage (localhost edits)
+  getSyncedLyrics(trackId: string, fallbackLyrics?: string, durationSec: number = 180, embeddedSyncedLyrics?: SyncedLine[]): SyncedLine[] {
+    // 1. Check user custom edits in localStorage
     try {
       const stored = localStorage.getItem(STORAGE_KEY_PREFIX + trackId);
       if (stored) {
@@ -28,7 +28,10 @@ export const SyncedLyricsService = {
       // ignore
     }
 
-    // 2. Exact built-in database (Matches localhost 100% on every public / mobile device)
+    // 2. Check embedded in track or built-in verified backup database (33 tracks)
+    if (embeddedSyncedLyrics && embeddedSyncedLyrics.length > 0) {
+      return embeddedSyncedLyrics;
+    }
     if (BUILTIN_SYNCED_LYRICS[trackId] && BUILTIN_SYNCED_LYRICS[trackId].length > 0) {
       return BUILTIN_SYNCED_LYRICS[trackId];
     }

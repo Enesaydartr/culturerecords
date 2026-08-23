@@ -158,8 +158,8 @@ export default function App() {
   const lyricsContainerRef = useRef<HTMLDivElement>(null);
 
   const currentSyncedLyrics = React.useMemo(() => {
-    return SyncedLyricsService.getSyncedLyrics(currentTrack.id, currentTrack.lyrics);
-  }, [currentTrack.id, currentTrack.lyrics, syncedVersion]);
+    return SyncedLyricsService.getSyncedLyrics(currentTrack.id, currentTrack.lyrics, currentTrack.durationSec, currentTrack.syncedLyrics);
+  }, [currentTrack.id, currentTrack.lyrics, currentTrack.syncedLyrics, currentTrack.durationSec, syncedVersion]);
 
   const activeLyricIndex = React.useMemo(() => {
     if (!currentSyncedLyrics || currentSyncedLyrics.length === 0) return -1;
