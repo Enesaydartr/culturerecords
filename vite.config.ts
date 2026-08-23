@@ -571,6 +571,7 @@ function audioTrimmerPlugin(): Plugin {
 }
 
 export default defineConfig({
+  base: "./",
   plugins: [react(), bubiletApiPlugin(), audioTrimmerPlugin()],
   resolve: {
     alias: {
