@@ -1,4 +1,4 @@
-/**
+﻿code = """/**
  * Production Audio Engine for ERAY067 x MANSUR (Culture Records)
  * High-performance HTML5 Audio Engine with Web Audio spectrum analyzer.
  * Guarantees pure real-music playback with accurate trim start/end boundaries.
@@ -322,3 +322,9 @@ export class WebAudioEngine {
 }
 
 export const audioEngine = new WebAudioEngine();
+"""
+
+with open("src/audio/engine.ts", "w", encoding="utf-8") as f:
+    f.write(code)
+
+print("src/audio/engine.ts updated to strictly enforce audio trims!")
