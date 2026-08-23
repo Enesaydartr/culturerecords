@@ -27,7 +27,7 @@ const ERAY_SLIDES: SlideData[] = [
   },
   {
     title: "O SES RAP",
-    subtitle: "Sefo Takımı • 2025 Şampiyonluğu",
+    subtitle: "Sefo Takımı • 2023 Şampiyonluğu",
     tag: "MİHENK TAŞI",
     body: "O Ses Türkiye Rap sahnesinde sergilediği teknik üstünlük ve sahne karizmasıyla jüri ve halk oylamasında sezonun tartışmasız şampiyonu oldu.",
     accent: "text-neutral-100"

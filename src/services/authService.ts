@@ -44,7 +44,7 @@ const INITIAL_USERS: UserProfile[] = [
     email: "eray@alliancerecords.com",
     displayName: "ERAY067",
     avatar: "/assets/images/eray067_portrait.jpg",
-    bio: "O Ses Rap Şampiyonu • ALLIANCE • Frankfurt am Main",
+    bio: "O Ses Rap 2023 Şampiyonu • ALLIANCE • Frankfurt am Main",
     role: "admin",
     favoriteTrackId: "g_wagon",
     createdAt: "2026-01-01T00:00:00.000Z",

@@ -1578,7 +1578,7 @@ Korku yok bizim lügatte!`,
 Dokuz milim glock, üstümde var bi' emanet
 Sizin flowlar rezalet, yaparım felaket
 Tam isabet, 067, tamamlanmış full paket
-Şirketler der "Bu nası' cesaret?"
+Şirketler der "Bu nası' cesaret?"
 
 Pafladım ofiste choco marrakesh
 Sizinkiler kalleş
@@ -1629,19 +1629,19 @@ export const ARTISTS: Artist[] = [
     birthYear: "2003",
     role: "Flow King / German Drill & Trap Öncüsü",
     monthlyListeners: "2.7M+",
-    achievements: "O Ses Türkiye Rap 2. Sezon Şampiyonu (Sefo Takımı)",
+    achievements: "O Ses Türkiye Rap 2023 Şampiyonu (Sefo Takımı)",
     signatureStyle: "Frankfurt 067 Sokak Drill & Çift Zamanlı (Double-time) Flow Tekniği",
     instagram: "https://www.instagram.com/eray067_",
     spotify: "https://open.spotify.com/intl-tr/artist/7l1AEP7z8ERNZzknXqPUFT",
     youtube: "https://www.youtube.com/@eray067-topic",
     image: "/assets/images/eray067_portrait.jpg",
     bannerImage: "/assets/images/tmax.jpg",
-    bio: "2003 yılında Frankfurt am Main'de doğan Eray Ünal, Avrupa sokak realizmini ve sert German Drill ritimlerini Türk rap sahnesine taşıdı. O Ses Türkiye Rap 2. sezonunda Sefo'nun koçluğunda sergilediği 'Bana Gelsen', 'Catalonya' ve 'Zirve' performanslarıyla yarışmanın şampiyonu oldu. 'G WAGON', 'Tmax', 'BRAPAP II' ve 'BALMAIN' teklileriyle yüz milyonlarca dinlenmeye ulaştı.",
+    bio: "2003 yılında Frankfurt am Main'de doğan Eray Ünal, Avrupa sokak realizmini ve sert German Drill ritimlerini Türk rap sahnesine taşıdı. O Ses Türkiye Rap 2023 sezonunda Sefo'nun koçluğunda sergilediği 'Bana Gelsen', 'Catalonya' ve 'Zirve' performanslarıyla yarışmanın şampiyonu oldu. 'G WAGON', 'Tmax', 'BRAPAP II' ve 'BALMAIN' teklileriyle yüz milyonlarca dinlenmeye ulaştı.",
   },
   {
     id: "mansur",
     name: "MANSUR",
-    fullName: "Ahmet Mansur Şahin",
+    fullName: "Ahmet Mansur Şahin",
     origin: "Ankara / Malatya",
     birthYear: "2002",
     role: "Melodik Hook Ustası / Vokal Mimarı",

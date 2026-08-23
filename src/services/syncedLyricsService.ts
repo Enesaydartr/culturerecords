@@ -1,3 +1,5 @@
+import { DEFAULT_SYNCED_LYRICS } from "../data/defaultSyncedLyrics";
+
 export interface SyncedLine {
   time: number; // in seconds
   text: string;
@@ -23,6 +25,10 @@ export const SyncedLyricsService = {
       }
     } catch {
       // ignore
+    }
+
+    if (DEFAULT_SYNCED_LYRICS[trackId] && DEFAULT_SYNCED_LYRICS[trackId].length > 0) {
+      return DEFAULT_SYNCED_LYRICS[trackId];
     }
 
     if (fallbackLyrics) {
