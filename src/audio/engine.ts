@@ -173,11 +173,36 @@ export class WebAudioEngine {
       : this.durationSec;
   }
 
+  private blobCache: Map<string, string> = new Map();
+
+  private async _getPlayableAudioUrl(trackId: string): Promise<string> {
+    const rawPath = `/assets/audio/${trackId}.mp4`;
+    if (this.blobCache.has(trackId)) {
+      return this.blobCache.get(trackId)!;
+    }
+    try {
+      const res = await fetch(rawPath, {
+        headers: { "ngrok-skip-browser-warning": "true" }
+      });
+      if (res.ok) {
+        const blob = await res.blob();
+        if (blob.type.includes("video") || blob.type.includes("audio") || blob.size > 50000) {
+          const blobUrl = URL.createObjectURL(blob);
+          this.blobCache.set(trackId, blobUrl);
+          return blobUrl;
+        }
+      }
+    } catch {
+      // fallback to raw path
+    }
+    return rawPath;
+  }
+
   private _resolveAudioPath(trackId: string): string {
     return `/assets/audio/${trackId}.mp4`;
   }
 
-  public loadTrack(track: Track) {
+  public async loadTrack(track: Track) {
     this.currentTrack = track;
     const trim = SyncedLyricsService.getTrim(track.id);
     const startPosition = trim ? trim.startSec : 0;
@@ -185,7 +210,7 @@ export class WebAudioEngine {
     this.currentTimeSec = startPosition;
 
     if (this.audioEl) {
-      const src = this._resolveAudioPath(track.id);
+      const src = await this._getPlayableAudioUrl(track.id);
       if (this.audioEl.src !== src && !this.audioEl.src.endsWith(src)) {
         this.audioEl.src = src;
         this.audioEl.load();
@@ -217,7 +242,7 @@ export class WebAudioEngine {
     } catch {}
   }
 
-  public startMusic(track?: Track) {
+  public async startMusic(track?: Track) {
     const targetTrack = track || this.currentTrack;
     if (!targetTrack) return;
     this.init();
@@ -227,7 +252,7 @@ export class WebAudioEngine {
     this.durationSec = trim && trim.endSec > 0 ? trim.endSec : (targetTrack.durationSec || 180);
 
     if (this.audioEl) {
-      const src = this._resolveAudioPath(targetTrack.id);
+      const src = await this._getPlayableAudioUrl(targetTrack.id);
       const isSameSrc = this.audioEl.src.endsWith(src) || this.audioEl.src === src;
       if (!isSameSrc) {
         this.audioEl.src = src;
