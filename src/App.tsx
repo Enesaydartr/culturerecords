@@ -26,6 +26,7 @@ import SongCommentsDrawer from "@/components/SongCommentsDrawer";
 import NewsSection from "@/components/NewsSection";
 import UserProfileModal from "@/components/UserProfileModal";
 import AddToPlaylistModal from "@/components/AddToPlaylistModal";
+import ModernAppView from "@/components/ModernAppView";
 import { Button } from "@/components/ui/button";
 import {
   Play,
@@ -58,11 +59,34 @@ import {
   ShieldCheck,
   Menu,
   Plus,
-  Trash2
+  Trash2,
+  Zap
 } from "lucide-react";
 
 export default function App() {
   const [currentUser, setCurrentUser] = useState<UserProfile | null>(AuthService.getCurrentUser());
+  const [viewMode, setViewMode] = useState<"classic" | "v2">(() => {
+    try {
+      const param = new URLSearchParams(window.location.search).get("view");
+      if (param === "v2" || window.location.hash.includes("v2")) return "v2";
+      const saved = localStorage.getItem("alliance_view_mode");
+      return saved === "v2" || saved === "classic" ? saved : "classic";
+    } catch {
+      return "classic";
+    }
+  });
+
+  const handleToggleViewMode = () => {
+    const next = viewMode === "classic" ? "v2" : "classic";
+    setViewMode(next);
+    try {
+      localStorage.setItem("alliance_view_mode", next);
+    } catch {
+      // ignore
+    }
+    triggerToast(next === "v2" ? "✨ Yeni V2 Modern Görünüme Geçildi!" : "⚡ Klasik Görünüme Geçildi!");
+  };
+
   const [activeCategory, setActiveCategory] = useState<"all" | "alliance" | "hits" | "collab">("all");
   const [trackSortOrder, setTrackSortOrder] = useState<"newest" | "oldest" | "popular">("newest");
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
@@ -336,11 +360,16 @@ export default function App() {
     audioEngine.setVolume(pct / 100);
   };
 
+  const handleSeek = (targetSec: number) => {
+    const clamped = Math.max(0, Math.min(durationSec, targetSec));
+    setCurrentTimeSec(clamped);
+    audioEngine.seekToSeconds(clamped);
+  };
+
   const handleScrubberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const pct = parseFloat(e.target.value);
     const targetSec = (pct / 100) * durationSec;
-    setCurrentTimeSec(targetSec);
-    audioEngine.seekToSeconds(targetSec);
+    handleSeek(targetSec);
   };
 
   const formatTime = (secs: number) => {
@@ -451,10 +480,51 @@ export default function App() {
   });
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-neutral-100 selection:bg-red-600 selection:text-white pb-36 sm:pb-28 font-mono">
-      
-      {/* 1. EDITORIAL HEADER */}
-      <header className="sticky top-0 z-40 h-16 w-full border-b border-white/[0.08] bg-[#0a0a0a]/92 backdrop-blur-xl">
+    <>
+      {viewMode === "v2" ? (
+        <ModernAppView
+          currentUser={currentUser}
+          currentTrack={currentTrack}
+          isPlaying={isPlaying}
+          isMuted={isMuted}
+          isShuffle={isShuffle}
+          repeatMode={repeatMode}
+          currentTimeSec={currentTimeSec}
+          durationSec={durationSec}
+          volumePct={volumePct}
+          currentStats={currentStats}
+          currentSyncedLyrics={currentSyncedLyrics}
+          activeLyricIndex={activeLyricIndex}
+          liveConcerts={liveConcerts}
+          ticketSales={ticketSales}
+          onPlayTrack={playTrack}
+          onToggleMasterPlay={toggleMasterPlay}
+          onPrevTrack={handlePrevTrack}
+          onNextTrack={handleNextTrack}
+          onToggleRepeat={toggleRepeatMode}
+          onToggleShuffle={toggleShuffle}
+          onSeek={handleSeek}
+          onVolumeChange={handleVolumeChange}
+          onToggleMute={toggleMute}
+          onOpenRightDrawer={() => setIsRightDrawerOpen(true)}
+          onOpenListenTogether={() => setIsListenTogetherOpen(true)}
+          onOpenAdminHub={() => setIsAdminHubOpen(true)}
+          onOpenAuthModal={(mode) => {
+            setAuthModalMode(mode || "login");
+            setIsAuthModalOpen(true);
+          }}
+          onOpenMixModal={() => setIsMixModalOpen(true)}
+          onOpenCommentsDrawer={() => setIsCommentsDrawerOpen(true)}
+          onUserProfileClick={(userId) => setViewingUserId(userId)}
+          onAddToPlaylist={(track) => setPlaylistModalTrack(track)}
+          onToggleViewMode={handleToggleViewMode}
+          triggerToast={triggerToast}
+        />
+      ) : (
+        <div className="min-h-screen bg-[#0a0a0a] text-neutral-100 selection:bg-red-600 selection:text-white pb-36 sm:pb-28 font-mono">
+          
+          {/* 1. EDITORIAL HEADER */}
+          <header className="sticky top-0 z-40 h-16 w-full border-b border-white/[0.08] bg-[#0a0a0a]/92 backdrop-blur-xl">
         <div className="container flex h-full items-center justify-between">
           <div className="flex items-center gap-3">
             <img
@@ -481,6 +551,18 @@ export default function App() {
           {/* Top Actions: Right Hub Drawer, Listen Together, Auth & Admin Hub */}
           <div className="flex items-center gap-2 sm:gap-3">
             
+            {/* View Mode Switcher Button (Classic -> V2) */}
+            <button
+              type="button"
+              onClick={handleToggleViewMode}
+              className="px-2.5 sm:px-3 py-1.5 bg-gradient-to-r from-red-600/30 to-purple-600/30 hover:from-red-600/60 hover:to-purple-600/60 border border-red-500/50 text-red-300 hover:text-white text-xs font-black uppercase transition-all flex items-center gap-1.5 shadow-md active:scale-95 cursor-pointer"
+              title="Yeni V2 Görünümüne Geç"
+            >
+              <Sparkles className="h-3.5 w-3.5 text-amber-400 animate-spin" style={{ animationDuration: "4s" }} />
+              <span className="hidden sm:inline">✨ YENİ GÖRÜNÜM (V2)</span>
+              <span className="sm:hidden">V2 ✨</span>
+            </button>
+
             {/* Birlikte Dinle Button (Responsive Desktop + Mobile) */}
             <button
               type="button"
@@ -1287,7 +1369,22 @@ export default function App() {
         </div>
       )}
 
-      {/* 10. AUTH & PROFILE MODAL */}
+      {/* FOOTER */}
+      <footer className="container mt-20 border-t border-white/[0.08] pt-10 text-xs font-mono text-neutral-500">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+          <p>© 2026 ALLIANCE RECORDS / CULTURE RECORDS. TÜM HAKLARI SAKLIDIR.</p>
+          <p>ERAY067 (FRANKFURT) × MANSUR (ANKARA / MALATYA)</p>
+        </div>
+      </footer>
+
+        </div>
+      )}
+
+      {/* ========================================================================= */}
+      {/* SHARED MODALS & DRAWERS (ACCESSIBLE IN BOTH V2 MODERN & CLASSIC VIEWS)    */}
+      {/* ========================================================================= */}
+
+      {/* AUTH & PROFILE MODAL */}
       <AuthModal
         isOpen={isAuthModalOpen}
         onClose={() => setIsAuthModalOpen(false)}
@@ -1298,13 +1395,13 @@ export default function App() {
         }}
       />
 
-      {/* 11. ADMIN HUB (SECRET DASHBOARD) */}
+      {/* ADMIN HUB (SECRET DASHBOARD) */}
       <AdminHub
         isOpen={isAdminHubOpen}
         onClose={() => setIsAdminHubOpen(false)}
       />
 
-      {/* 12. RIGHT SIDEBAR DRAWER (Playlists, Mixes, Chat/DM, Sync) */}
+      {/* RIGHT SIDEBAR DRAWER (Playlists, Mixes, Chat/DM, Sync) */}
       <RightSidebarDrawer
         isOpen={isRightDrawerOpen}
         onUserProfileClick={(uid) => setViewingUserId(uid)}
@@ -1319,14 +1416,14 @@ export default function App() {
         }}
       />
 
-      {/* 13. COMMUNITY MIX UPLOAD MODAL */}
+      {/* COMMUNITY MIX UPLOAD MODAL */}
       <CommunityMixModal
         isOpen={isMixModalOpen}
         onClose={() => setIsMixModalOpen(false)}
         onMixCreated={() => triggerToast("Mixiniz başarıyla yayınlandı!")}
       />
 
-      {/* 14. LISTEN TOGETHER / SYNC ROOM MODAL */}
+      {/* LISTEN TOGETHER / SYNC ROOM MODAL */}
       <ListenTogetherModal
         isOpen={isListenTogetherOpen}
         onClose={() => setIsListenTogetherOpen(false)}
@@ -1334,7 +1431,7 @@ export default function App() {
         onUserProfileClick={(uid) => setViewingUserId(uid)}
       />
 
-      {/* 15. SONG COMMENTS & STATS DRAWER */}
+      {/* SONG COMMENTS & STATS DRAWER */}
       <SongCommentsDrawer
         isOpen={isCommentsDrawerOpen}
         onClose={() => setIsCommentsDrawerOpen(false)}
@@ -1346,7 +1443,7 @@ export default function App() {
         }}
       />
 
-      {/* 16. USER PROFILE MODAL */}
+      {/* USER PROFILE MODAL */}
       <UserProfileModal
         isOpen={!!viewingUserId}
         onClose={() => setViewingUserId(null)}
@@ -1358,7 +1455,7 @@ export default function App() {
         }}
       />
 
-      {/* 17. ADD TO PLAYLIST MODAL */}
+      {/* ADD TO PLAYLIST MODAL */}
       <AddToPlaylistModal
         isOpen={!!playlistModalTrack}
         onClose={() => setPlaylistModalTrack(null)}
@@ -1375,15 +1472,6 @@ export default function App() {
           <span>// {toastMessage}</span>
         </div>
       )}
-
-      {/* FOOTER */}
-      <footer className="container mt-20 border-t border-white/[0.08] pt-10 text-xs font-mono text-neutral-500">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <p>© 2026 ALLIANCE RECORDS / CULTURE RECORDS. TÜM HAKLARI SAKLIDIR.</p>
-          <p>ERAY067 (FRANKFURT) × MANSUR (ANKARA / MALATYA)</p>
-        </div>
-      </footer>
-
-    </div>
+    </>
   );
 }
