@@ -10,8 +10,8 @@ export interface TrackTrim {
   endSec: number;
 }
 
-const STORAGE_KEY_PREFIX = "eray_mansur_synced_lyrics_v4_";
-const TRIM_KEY_PREFIX = "eray_mansur_trim_v4_";
+const STORAGE_KEY_PREFIX = "eray_mansur_synced_lyrics_v5_";
+const TRIM_KEY_PREFIX = "eray_mansur_trim_v5_";
 
 export const SyncedLyricsService = {
   getSyncedLyrics(trackId: string, fallbackLyrics?: string, durationSec: number = 180): SyncedLine[] {
